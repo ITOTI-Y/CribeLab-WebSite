@@ -1,0 +1,179 @@
+// lib/api.ts
+
+export interface ResearchItem {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    width?: number;
+    height?: number;
+}
+
+export async function getResearchData(): Promise<ResearchItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp/v2/research`;
+    try {
+        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        if (!res.ok) {
+            console.error(`Failed to fetch research data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data = await res.json();
+        const researchItems: ResearchItem[] = data.map((item: any) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            return {
+                id: item.id,
+                title: item.title?.rendered || 'Untitled Research',
+                description: item.acf?.description || null,
+                image: acfImageUrl || null,
+                width: item.acf?.thumbnail?.width || null,
+                height: item.acf?.thumbnail?.height || null,
+            };
+        });
+        return researchItems;
+    } catch (error) {
+        console.error("Error fetching or processing research data:", error);
+        return [];
+    }
+}
+
+export interface PublicationItem {
+    id: number;
+    title: string;
+    authors: string;
+    year: string;
+    journal?: string | null;
+    thumbnail?: string | null;
+    is_selected?: boolean;
+    summary?: string | null;
+}
+
+export async function getPublicationsData(): Promise<PublicationItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+
+    const fetchUrl = `${apiUrl}/wp/v2/publication?_embed&orderby=date&order=desc`;
+    try {
+        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        if (!res.ok) {
+            console.error(`Failed to fetch publications: ${res.status} ${res.statusText}`)
+            return [];
+        }
+        const data = await res.json();
+
+        const publications: PublicationItem[] = data.map((item: any) => {
+            const featuredImageUrl = item._embedded?.['wp:featuredmedia']?.[0]?.source_url || null;
+            const acfImageUrl = item.acf?.thumbnail?.url || null;
+            return {
+                id: item.id,
+                title: item.title?.rendered || 'Untitled Publication',
+                authors: item.acf?.authors || 'Unknown Authors',
+                year: item.acf?.year || 'N/A',
+                journal: item.acf?.journal || null,
+                thumbnail: acfImageUrl || featuredImageUrl || null,
+                is_selected: item.acf?.is_selected || false,
+                summary: item.acf?.summary || null,
+            };
+        });
+
+        return publications;
+    } catch (error) {
+        console.error("Error fetching or processing publications data:", error);
+        return [];
+    }
+}
+
+export interface TeamMemberItem {
+    id: number;
+    name: string;
+    role?: string | null;
+    image?: string | null;
+    is_featured?: boolean;
+    width?: number | null;
+    height?: number | null;
+}
+
+export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp/v2/team_member`
+    try{
+        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        if (!res.ok) {
+            console.error(`Failed to fetch team members: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data = await res.json();
+        const teamMembers: TeamMemberItem[] = data.map((item: any) => {
+            const acfImageUrl = item.acf?.member_image?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const width = item.acf?.member_image?.width || null;
+            const height = item.acf?.member_image?.height || null;
+            return {
+                id: item.id,
+                name: item.acf?.name || 'Unknown Member',
+                role: item.acf?.role || null,
+                image: acfImageUrl || null,
+                is_featured: item.acf?.is_featured || false,
+                width: width,
+                height: height,
+            };
+        });
+
+        return teamMembers;
+    } catch (error) {
+        console.error("Error fetching or processing team members data:", error);
+        return [];
+    }
+}
+
+export interface MeanItem {
+    id: string;
+    label: string;
+    href: string;
+}
+
+export async function getMeanData(): Promise<MeanItem[]> {
+    const meanitems: MeanItem[] = [
+        {
+            id: 'mean-home',
+            label: 'Home',
+            href: 'home',
+        },
+        {
+            id: 'mean-research',
+            label: 'Research',
+            href: 'research',
+        },
+        {
+            id: 'mean-publications',
+            label: 'Publications',
+            href: 'publications',
+        },
+        {
+            id: 'mean-team',
+            label: 'Team',
+            href: 'team',
+        },
+        {
+            id: 'mean-news',
+            label: 'News',
+            href: 'news',
+        },
+        {
+            id: 'mean-join',
+            label: 'Join Us',
+            href: 'join',
+        },
+    ]
+    return (meanitems);
+}
