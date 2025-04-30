@@ -1,7 +1,6 @@
 'use client';
-import Link from 'next/link';
 import { MeanItem } from '@/lib/api';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { Link as ScrollLink} from 'react-scroll';
 
 export default function VerticalMenu({ meanItems, toggleMenu, isMenuOpen }: { meanItems: MeanItem[], toggleMenu: () => void, isMenuOpen: boolean }) {
     return (

@@ -20,7 +20,7 @@ const renderHTML = (htmlString: string | undefined | null) => {
 export const SelectedCard = ({
     publication,
     className,
-}: SelectedCardProps): JSX.Element => {
+}: SelectedCardProps) => {
     return (
         // 使用传入的 className，考虑移除固定宽度 w-[560px]，让父组件控制
         <div className={`flex flex-row w-full items-start gap-4 relative ${className}`}>

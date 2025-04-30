@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 import ResearchSection from "@/components/ResearchSection";
 import PublicationsSection from "@/components/PublicationsSection";
@@ -6,6 +5,8 @@ import TeamSection from "@/components/TeamSection";
 import NewsSection from "@/components/NewsSection";
 import JoinSection from "@/components/JoinSection";
 import { getPublicationsData } from "@/lib/api";
+
+export const dynamic = 'force-dynamic';
 
 
 export default async function Home() {

@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { PublicationItem } from "@/lib/api";
-import { Tabs, Tab } from "@heroui/tabs";
-import { Slider } from "@heroui/slider";
 
 export default function AllPublicationFrame({ publications }: { publications: PublicationItem[] }) {
     const [selectedYear, setSelectedYear] = useState("all");

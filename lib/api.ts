@@ -1,10 +1,44 @@
 // lib/api.ts
 
+interface WordPressPost {
+    id: number;
+    title?: { 
+        rendered: string;
+    };
+    _embedded?: {
+        'wp:featuredmedia'?: {
+            source_url?: string;
+        }[];
+    };
+    acf?: { 
+        description?: string;
+        thumbnail?: { 
+            url?: string;
+            width?: number;
+            height?: number;
+        };
+        authors?: string | null;
+        year?: string | null;
+        journal?: string | null;
+        is_selected?: boolean;
+        summary?: string | null;
+        name?: string | null;
+        role?: string | null;
+        is_featured?: boolean;
+        member_image?: {
+            url?: string;
+            width?: number;
+            height?: number;
+        };
+        
+    };
+}
+
 export interface ResearchItem {
     id: number;
     title: string;
-    description: string;
-    image: string;
+    description: string | null;
+    image: string | null;
     width?: number;
     height?: number;
 }
@@ -17,21 +51,21 @@ export async function getResearchData(): Promise<ResearchItem[]> {
     }
     const fetchUrl = `${apiUrl}/wp/v2/research`;
     try {
-        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        const res = await fetch(fetchUrl);
         if (!res.ok) {
             console.error(`Failed to fetch research data: ${res.status} ${res.statusText}`);
             return [];
         }
-        const data = await res.json();
-        const researchItems: ResearchItem[] = data.map((item: any) => {
+        const data:WordPressPost[] = await res.json();
+        const researchItems: ResearchItem[] = data.map((item) => {
             const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
             return {
                 id: item.id,
                 title: item.title?.rendered || 'Untitled Research',
                 description: item.acf?.description || null,
                 image: acfImageUrl || null,
-                width: item.acf?.thumbnail?.width || null,
-                height: item.acf?.thumbnail?.height || null,
+                width: item.acf?.thumbnail?.width || undefined,
+                height: item.acf?.thumbnail?.height || undefined,
             };
         });
         return researchItems;
@@ -61,14 +95,14 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
 
     const fetchUrl = `${apiUrl}/wp/v2/publication?_embed&orderby=date&order=desc`;
     try {
-        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        const res = await fetch(fetchUrl);
         if (!res.ok) {
             console.error(`Failed to fetch publications: ${res.status} ${res.statusText}`)
             return [];
         }
-        const data = await res.json();
+        const data:WordPressPost[] = await res.json();
 
-        const publications: PublicationItem[] = data.map((item: any) => {
+        const publications: PublicationItem[] = data.map((item) => {
             const featuredImageUrl = item._embedded?.['wp:featuredmedia']?.[0]?.source_url || null;
             const acfImageUrl = item.acf?.thumbnail?.url || null;
             return {
@@ -108,13 +142,13 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
     }
     const fetchUrl = `${apiUrl}/wp/v2/team_member`
     try{
-        const res = await fetch(fetchUrl, { cache: 'no-store' });
+        const res = await fetch(fetchUrl);
         if (!res.ok) {
             console.error(`Failed to fetch team members: ${res.status} ${res.statusText}`);
             return [];
         }
-        const data = await res.json();
-        const teamMembers: TeamMemberItem[] = data.map((item: any) => {
+        const data:WordPressPost[] = await res.json();
+        const teamMembers: TeamMemberItem[] = data.map((item) => {
             const acfImageUrl = item.acf?.member_image?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
             const width = item.acf?.member_image?.width || null;
             const height = item.acf?.member_image?.height || null;

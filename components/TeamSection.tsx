@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { teamMembers } from "@/lib/data";
+
 import SubTitle from "@/components/custom/SubTitle";
 import Citation from "@/components/custom/Citation";
-import { getTeamMembersData, TeamMemberItem } from "@/lib/api";
+import { getTeamMembersData } from "@/lib/api";
 import FeaturedMemberCard from "@/components/custom/FeaturedMemberCard";
 import MemberCard from "@/components/custom/MemberCard";
 

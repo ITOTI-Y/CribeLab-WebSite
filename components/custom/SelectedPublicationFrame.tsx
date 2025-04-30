@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react';
 import { SelectedCard } from './SelectedCard';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PublicationItem } from '@/lib/api';
@@ -20,8 +19,7 @@ const SelectedPublicationFrame = ({ selectedPublications }: { selectedPublicatio
                     ))
                 ) : (
                     <p className="text-gray-400 text-sm text-center py-10">
-                        No selected publications found. Mark publications as
-                        'Selected' in WordPress.
+                        No selected publications found. Mark publications as Selected in WordPress.
                     </p>
                 )}
             </div>

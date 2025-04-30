@@ -1,6 +1,5 @@
 "use client";
 import {Image} from "@heroui/image";
-import NextImage from "next/image";
 // import Image from "next/image";
 import ReadMoreButton from "./ReadMoreButton";
 import { ResearchItem } from "@/lib/api";
