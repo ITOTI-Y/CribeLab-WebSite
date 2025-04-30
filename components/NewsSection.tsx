@@ -19,7 +19,7 @@ const NewsSection = () => {
                         >
                             <div className="p-3 border-b border-gray-800">
                                 <time className="text-xs text-gray-400">
-                                    {formatDate(news.date)}
+                                    12/04/2025
                                 </time>
                             </div>
                             <div className="h-48 relative bg-neutral-800">

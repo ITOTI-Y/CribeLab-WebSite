@@ -14,7 +14,7 @@ const ResearchSection = async () => {
             <div className="font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <SubTitle content={subtitle} />
                 <Citation content={citation} />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {researchData.map((area) => (
                         <ResearchCard key={area.id} area={area} />
                     ))}

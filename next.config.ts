@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'www.cribelab.org',
             },
+            {
+                protocol: 'https',
+                hostname: 'images.pexels.com',
+            },
         ],
     },
     allowedDevOrigins: ['100.64.116.13'],

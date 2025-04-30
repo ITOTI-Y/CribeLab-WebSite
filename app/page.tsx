@@ -17,7 +17,7 @@ export default async function Home() {
             {/* 将获取到的数据作为 prop 传递 */}
             <PublicationsSection publications={publicationsData} />
             <TeamSection /* teamMembers={teamData} */ />
-            
+            <NewsSection />
             <JoinSection />
         </main>
     );

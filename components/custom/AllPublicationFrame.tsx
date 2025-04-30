@@ -42,14 +42,6 @@ export default function AllPublicationFrame({ publications }: { publications: Pu
             </div>
 
             <div className="space-y-6">
-                <Tabs aria-label="Publication Tabs">
-                    <Tab key="all" title="All">
-                        <span>All</span>
-                    </Tab>
-                    <Tab key="2024" title="2024">
-                        <span>2024</span>
-                    </Tab>
-                </Tabs>
                 {filteredPublications.map((pub) => (
                     <div key={pub.id} className="py-4 border-b border-gray-800">
                         <p className="text-sm text-gray-300 mb-1">{pub.title}</p>
