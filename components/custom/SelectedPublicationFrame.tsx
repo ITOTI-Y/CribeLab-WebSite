@@ -11,7 +11,7 @@ const SelectedPublicationFrame = ({ selectedPublications }: { selectedPublicatio
         <h3 className="text-xl font-semibold text-white mb-6 text-center">
             Selected Publications
         </h3>
-        <ScrollArea className="h-96 w-full pr-4">
+        <ScrollArea className="h-96 md:h-128 w-full pr-4">
             <div className="space-y-6 p-4">
                 {selectedPublications.length > 0 ? (
                     selectedPublications.map((pub) => (

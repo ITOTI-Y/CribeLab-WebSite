@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image"; // 引入 Next.js Image 组件
 import type { PublicationItem } from "@/lib/api"; // 假设你的接口定义在这里
 
@@ -22,8 +23,7 @@ export const SelectedCard = ({
     className,
 }: SelectedCardProps) => {
     return (
-        // 使用传入的 className，考虑移除固定宽度 w-[560px]，让父组件控制
-        <div className={`flex flex-row w-full items-start gap-4 relative ${className}`}>
+        <Link href={publication.url || "#"} className={`overflow-hidden hover:opacity-80 transition-opacity duration-300 flex flex-row w-full items-start gap-4 relative ${className}`}>
             {/* 3. 图片容器 */}
             <div className="flex w-40 h-32 bg-neutral-800 relative overflow-hidden rounded-sm">
                 {" "}
@@ -61,6 +61,6 @@ export const SelectedCard = ({
                     {publication.authors || "Unknown authors"}
                 </p>
             </div>
-        </div>
+        </Link>
     );
 };
