@@ -1,5 +1,3 @@
-// TODO: 完成Publication页面
-
 import HeroSection from "@/components/HeroSection";
 import ResearchSection from "@/components/ResearchSection";
 import PublicationsSection from "@/components/PublicationsSection";

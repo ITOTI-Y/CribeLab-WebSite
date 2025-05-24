@@ -11,7 +11,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className="antialiased">
+            <body className="antialiased flex flex-col">
                 <Header />
                 {children}
                 <Footer />
