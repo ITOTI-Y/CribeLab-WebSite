@@ -4,20 +4,16 @@ import { useState } from "react";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PublicationItem } from "@/lib/api";
 
-export default function AllPublicationFrame({
-  publications,
-}: {
-  publications: PublicationItem[];
-}) {
-  const [selectedYear, setSelectedYear] = useState("all");
-  const years = [...new Set(publications.map((pub) => pub.year))].sort(
-    (a, b) => parseInt(b) - parseInt(a),
-  );
+export default function AllPublicationFrame({ publications,}: { publications: PublicationItem[];}) {
+    const [selectedYear, setSelectedYear] = useState("all");
+    const years = [...new Set(publications.map((pub) => pub.year))].sort(
+        (a, b) => parseInt(b) - parseInt(a),
+    );
 
-  const filteredPublications =
-    selectedYear === "all"
-      ? publications.sort((a, b) => parseInt(b.year) - parseInt(a.year))
-      : publications.filter((pub) => pub.year === selectedYear);
+    const filteredPublications =
+        selectedYear === "all"
+            ? publications.sort((a, b) => parseInt(b.year) - parseInt(a.year))
+            : publications.filter((pub) => pub.year === selectedYear);
 
     return (
         <div>
