@@ -30,7 +30,7 @@ interface WordPressPost {
             width?: number;
             height?: number;
         };
-        
+        categories?: string | null;
     };
 }
 
@@ -77,13 +77,17 @@ export async function getResearchData(): Promise<ResearchItem[]> {
 
 export interface PublicationItem {
     id: number;
-    title: string;
+    categories: string | null;
     authors: string;
-    year: string;
-    journal?: string | null;
     thumbnail?: string | null;
-    is_selected?: boolean;
+    thumbnail_description?: string | null;
+    title: string;
+    year: string;
     summary?: string | null;
+    journal?: string | null;
+    abstract?: string | null;
+    url?: string | null;
+    is_selected?: boolean;
 }
 
 export async function getPublicationsData(): Promise<PublicationItem[]> {
@@ -107,6 +111,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
             const acfImageUrl = item.acf?.thumbnail?.url || null;
             return {
                 id: item.id,
+                categories: item.acf?.categories || null,
                 title: item.title?.rendered || 'Untitled Publication',
                 authors: item.acf?.authors || 'Unknown Authors',
                 year: item.acf?.year || 'N/A',
@@ -140,7 +145,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp/v2/team_member`
+    const fetchUrl = `${apiUrl}/wp/v2/member`
     try{
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -156,7 +161,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
                 id: item.id,
                 name: item.acf?.name || 'Unknown Member',
                 role: item.acf?.role || null,
-                image: acfImageUrl || null,
+                image: acfImageUrl,
                 is_featured: item.acf?.is_featured || false,
                 width: width,
                 height: height,
