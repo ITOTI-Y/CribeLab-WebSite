@@ -31,6 +31,10 @@ interface WordPressPost {
             height?: number;
         };
         categories?: string | null;
+        title?: string | null;
+        thumbnail_describe?: string | null;
+        abstract?: string | null;
+        url?: string | null;
     };
 }
 
@@ -77,12 +81,12 @@ export async function getResearchData(): Promise<ResearchItem[]> {
 
 export interface PublicationItem {
     id: number;
-    categories: string | null;
+    categories: string;
     authors: string;
     thumbnail?: string | null;
-    thumbnail_description?: string | null;
-    title: string;
+    thumbnail_describe?: string | null;
     year: string;
+    title: string;
     summary?: string | null;
     journal?: string | null;
     abstract?: string | null;
@@ -97,7 +101,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
         return [];
     }
 
-    const fetchUrl = `${apiUrl}/wp/v2/publication?_embed&orderby=date&order=desc`;
+    const fetchUrl = `${apiUrl}/wp/v2/publication?_embed&orderby=date&order=desc&per_page=100`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -111,14 +115,18 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
             const acfImageUrl = item.acf?.thumbnail?.url || null;
             return {
                 id: item.id,
-                categories: item.acf?.categories || null,
-                title: item.title?.rendered || 'Untitled Publication',
+                categories: item.acf?.categories || 'Unknown Category',
                 authors: item.acf?.authors || 'Unknown Authors',
-                year: item.acf?.year || 'N/A',
-                journal: item.acf?.journal || null,
                 thumbnail: acfImageUrl || featuredImageUrl || null,
-                is_selected: item.acf?.is_selected || false,
+                thumbnail_describe: item.acf?.thumbnail_describe || null,
+                year: item.acf?.year || 'N/A',
+                title: item.acf?.title || 'Untitled Publication',
                 summary: item.acf?.summary || null,
+                journal: item.acf?.journal || null,
+                abstract: item.acf?.abstract || null,
+                url: item.acf?.url || null,
+                is_selected: item.acf?.is_selected || false,
+                
             };
         });
 

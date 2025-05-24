@@ -166,29 +166,29 @@ export const teamMembers = [
 export const newsItems = [
     {
         id: 1,
-        title: 'New research grant awarded for climate adaptation study',
-        excerpt: 'Our lab has received a major grant to study building adaptation strategies for extreme weather events.',
+        title: 'Test News Title',
+        excerpt: 'Test News Excerpt 1',
         date: '2023-04-15',
         image: 'https://images.pexels.com/photos/2990644/pexels-photo-2990644.jpeg'
     },
     {
         id: 2,
-        title: 'Publication in Energy and Buildings journal',
-        excerpt: 'Our latest research on energy-efficient building design has been published in a leading journal.',
+        title: 'Test News 2',
+        excerpt: 'Test News Excerpt 2',
         date: '2023-03-22',
         image: 'https://images.pexels.com/photos/259751/pexels-photo-259751.jpeg'
     },
     {
         id: 3,
-        title: 'Conference presentation on thermal comfort',
-        excerpt: 'Dr. Shen presented our work on adaptive thermal comfort at the International Building Physics Conference.',
+        title: 'Test News 3',
+        excerpt: 'Test News Excerpt 3',
         date: '2023-02-10',
         image: 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg'
     },
     {
         id: 4,
-        title: 'New research collaboration with industry partners',
-        excerpt: 'We are excited to announce a new partnership with leading architecture firms to implement our research.',
+        title: 'Test News 4',
+        excerpt: 'Test News Excerpt 4',
         date: '2023-01-05',
         image: 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg'
     }

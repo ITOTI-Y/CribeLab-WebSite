@@ -3,8 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 export const metadata: Metadata = {
-    title: "Cribe Lab",
-    description: "Cribe Lab",
+    title: "Cribelab",
+    description: "LAB OF CLIMATE RESPONSIVE AND INTELLIGENT BUILT ENVIRONMENT",
 };
 export default function RootLayout({
     children,
