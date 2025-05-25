@@ -1,12 +1,10 @@
 import { PublicationItem } from "@/lib/api";
 import Image from "next/image";
-import { useState } from "react";
 import { Textfit } from 'react-textfit';
 import PublicationReadMoreButton from "@/components/publication/PublicationReadMoreButton";
 import NextLink from "next/link";
 
 export default function PublicationDetailCard({ publication }: { publication: PublicationItem }) {
-    const [isSelected, setIsSelected] = useState(false);
     return (
         <div
             className="flex flex-col w-[360px] h-[528px] py-4 px-4
