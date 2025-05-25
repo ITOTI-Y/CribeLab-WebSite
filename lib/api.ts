@@ -79,6 +79,7 @@ export interface PublicationItem {
     journal?: string | null; // 来自 PublicationACF
     abstract?: string | null; // 来自 PublicationACF
     url?: string | null;     // 来自 PublicationACF
+    pdf?: string | null;     // 来自 PublicationACF
     is_selected?: boolean; // 来自 PublicationACF
 }
 
