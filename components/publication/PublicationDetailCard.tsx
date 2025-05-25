@@ -2,7 +2,7 @@ import { PublicationItem } from "@/lib/api";
 import Image from "next/image";
 import { useState } from "react";
 import { Textfit } from 'react-textfit';
-import ReadMoreButton from "@/components/custom/ReadMoreButton";
+import PublicationReadMoreButton from "@/components/publication/PublicationReadMoreButton";
 import NextLink from "next/link";
 
 export default function PublicationDetailCard({ publication }: { publication: PublicationItem }) {
@@ -11,7 +11,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
         <div
             className="flex flex-col w-[360px] h-[528px] py-4 px-4
             bg-neutral-800 text-white
-            hover:bg-white rounded-sm transition-colors duration-300
+            hover:bg-gray-100 rounded-sm transition-colors duration-300
             hover:text-black"
         >
             <div className="text-sm font-thin italic h-4">
@@ -65,10 +65,13 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                     fill
                     className="object-hidden" />
             </div>
-            <div className="flex justify-between items-center py-6">
-                <ReadMoreButton href={`/publication/${publication.id}`} text="READ MORE" />
-                <NextLink 
+            <div className="flex justify-between items-center py-8 px-1">
+                <PublicationReadMoreButton 
                     href={publication.url || ""}
+                    text="Read More"
+                />
+                <NextLink 
+                    href={publication.pdf || ""}
                     className="py-2 px-4 rounded-md text-sm bg-neutral-700 text-white font-extralight cursor-pointer">
                     Download
                 </NextLink>

@@ -42,8 +42,8 @@ export default function PublicationFrame({
                     {/* 示例：展示过滤后的出版物数量 */}
                     <p className="text-white">
                         {selectedYear === "All" 
-                            ? `显示所有 ${filteredPublications.length} 个出版物`
-                            : `显示 ${selectedYear} 年的 ${filteredPublications.length} 个出版物`
+                            ? `Show all  ${filteredPublications.length} publications`
+                            : `Show ${filteredPublications.length} publications for ${selectedYear} year`
                         }
                     </p>
                 </div>
