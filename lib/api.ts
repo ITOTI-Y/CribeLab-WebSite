@@ -9,7 +9,8 @@ interface ACFImage {
 interface ResearchACF {
     title?: string | null;
     description?: string | null;
-    thumbnail?: ACFImage | null;
+    thumbnail?: ACFImage;
+    icon?: string | null;
 }
 
 interface PublicationACF {
@@ -62,9 +63,10 @@ export interface ResearchItem {
     id: number;
     title: string; // 来自 ResearchACF.title (ACF 字段)
     description: string | null; // 来自 ResearchACF
-    image: string | null; // 来自 ResearchACF.thumbnail.url 或占位符
+    image: string; // 来自 ResearchACF.thumbnail.url 或占位符
     width?: number;
     height?: number;
+    icon?: string;
 }
 
 export interface PublicationItem {
@@ -93,15 +95,6 @@ export interface TeamMemberItem {
     height?: number | null;
 }
 
-export interface ResearchItem {
-    id: number;
-    title: string;
-    description: string | null;
-    image: string | null;
-    width?: number;
-    height?: number;
-}
-
 export async function getResearchData(): Promise<ResearchItem[]> {
     const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
     if (!apiUrl) {
@@ -126,6 +119,7 @@ export async function getResearchData(): Promise<ResearchItem[]> {
                 image: acfImageUrl, // image 现在直接使用 acfImageUrl
                 width: item.acf?.thumbnail?.width || undefined,
                 height: item.acf?.thumbnail?.height || undefined,
+                icon: item.acf?.icon || undefined,
             };
         });
         return researchItems;
