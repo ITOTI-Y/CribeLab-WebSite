@@ -10,11 +10,11 @@ const ResearchSection = async () => {
   const researchData = await getResearchData();
 
   return (
-    <section id="research" className="w-full py-20 bg-black">
+    <section id="research" className="w-full py-20 bg-black flex flex-col items-center">
       <div className="font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SubTitle content={subtitle} />
         <Citation content={citation} />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {researchData.map((area) => (
             <ResearchCard key={area.id} area={area} />
           ))}
