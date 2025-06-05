@@ -31,7 +31,7 @@ export default function PublicationFrame({
                     selectedYear={selectedYear}
                     onYearChange={setSelectedYear}
                 />
-                <div className="grid grid-cols-3 gap-x-4 gap-y-4 w-fit">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-4 w-fit">
                     {filteredPublications.map((publication) => (
                         <PublicationDetailCard key={publication.id} publication={publication} />
                     ))}

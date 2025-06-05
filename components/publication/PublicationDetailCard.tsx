@@ -26,7 +26,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                     {publication.title}
                 </Textfit>
             </div>
-            <div className="grid grid-cols-2 gap-4 py-2">
+            <div className="grid grid-cols-1 gap-4 py-2">
                 <div className="flex flex-col text-sm font-thin italic">
                     <span className="font-bold">Authors:</span>
                     <div className="pt-1 h-12 w-full overflow-hidden">
@@ -41,7 +41,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                         </Textfit>
                     </div>
                 </div>
-                <div className="flex flex-col text-sm font-thin italic">
+                {/* <div className="flex flex-col text-sm font-thin italic">
                     <span className="font-bold">Categories:</span>
                     <div className="pt-1 h-12 w-full overflow-hidden">
                         <Textfit
@@ -54,7 +54,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                             {publication.categories}
                         </Textfit>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="relative overflow-hidden rounded-sm h-[200px]">
                 <Image
