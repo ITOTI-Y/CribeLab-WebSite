@@ -34,6 +34,7 @@ export const SelectedCard = ({
                         src={publication.thumbnail}
                         alt={publication.title || "Publication thumbnail"} // 使用标题作为 alt 文本，提供默认值
                         fill // 使用 fill 填充容器
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover" // 保持图片比例并覆盖容器
                     />
                 ) : (
