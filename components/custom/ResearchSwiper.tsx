@@ -16,7 +16,7 @@ interface ResearchSliderProps {
 
 const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
     return (
-        <div className="relative px-2 lg:px-10 mx-auto group/swiper">
+        <div className="relative mx-auto group/swiper">
             <Swiper
                 modules={[Navigation]}
                 spaceBetween={20}
@@ -36,14 +36,14 @@ const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
             </Swiper>
 
             <div className="research-swiper-button-prev absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
-                     text-white hover:bg-opacity-75 transition-all duration-300 transform -translate-x-1/2 
-                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:translate-x-0">
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform -translate-x-20
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:-translate-x-10">
                 <ChevronLeft className="w-8 h-8" />
             </div>
 
             <div className="research-swiper-button-next absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
-                     text-white hover:bg-opacity-75 transition-all duration-300 transform translate-x-1/2
-                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:translate-x-0">
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform translate-x-20
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:translate-x-10">
                 <ChevronRight className="w-8 h-8" />
             </div>
         </div>

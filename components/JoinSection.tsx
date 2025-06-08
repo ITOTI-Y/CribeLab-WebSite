@@ -1,8 +1,6 @@
 'use client'
 
 import { GraduationCap } from 'lucide-react';
-import MapComponent from './custom/MapComponent';
-import Link from "next/link";
 import dynamic from 'next/dynamic';
 
 const DynamicMap = dynamic(
@@ -28,7 +26,7 @@ const JoinSection = () => {
                     </p>
                     <div className="flex gap-4">
                         <GraduationCap className="w-5 h-5" />
-                        4 Master's Students
+                        4 Master&apos;s Students
                     </div>
                     <div className="flex gap-4">
                         <GraduationCap className="w-5 h-5" />

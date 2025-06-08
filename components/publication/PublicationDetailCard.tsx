@@ -1,6 +1,5 @@
 import { PublicationItem } from "@/lib/api";
 import Image from "next/image";
-import { Textfit } from 'react-textfit';
 import ReadMoreMoveButton from "@/components/custom/ReadMoreMoveButton";
 import NextLink from "next/link";
 

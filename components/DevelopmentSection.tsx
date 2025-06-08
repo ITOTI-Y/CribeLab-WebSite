@@ -1,6 +1,5 @@
 import Citation from "./custom/Citation";
 import SubTitle from "./custom/SubTitle";
-import DevelopmentCard from "./custom/DevelopmentCard";
 import DevelopmentSwiper from "./custom/DevelopmentSwiper";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -23,7 +22,7 @@ export default async function DevelopmentSection() {
                         className="inline-flex items-center justify-center mt-3 px-6 py-3 border 
                         border-white text-md font-medium rounded-full bg-white text-black "
                     >
-                        Discover more our Development 
+                        Discover more our Development
                         <ArrowRight className="w-5 h-5 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
                     </Link>
                 </div>
