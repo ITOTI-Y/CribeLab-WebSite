@@ -12,7 +12,7 @@ export default function YearSelector({
     return (
         <div className="flex justify-between items-center gap-4 px-4 py-4">
             <h1 className="text-white text-2xl font-bold">All Publications</h1>
-            <div className="grid grid-cols-14 gap-x-1 gap-y-1 bg-neutral-800 rounded-sm">
+            <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-14 gap-x-1 gap-y-1 bg-neutral-800 rounded-sm">
                 {years.map((year) => (
                     <button
                         key={year}

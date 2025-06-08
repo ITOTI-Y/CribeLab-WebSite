@@ -24,6 +24,7 @@ interface PublicationACF {
     journal?: string | null;
     abstract?: string | null;
     url?: string | null;
+    pdf?: string | null;
     is_selected?: boolean;
 }
 
@@ -32,6 +33,14 @@ interface TeamMemberACF {
     role?: string | null;
     is_featured?: boolean;
     member_image?: ACFImage | null;
+    is_team?: boolean;
+}
+
+interface DevelopmentACF {
+    title?: string | null;
+    url?: string | null;
+    description?: string | null;
+    thumbnail?: ACFImage;
 }
 
 interface BaseWordPressPost {
@@ -57,6 +66,10 @@ interface WordPressPublicationPostData extends BaseWordPressPost {
 
 interface WordPressTeamMemberPostData extends BaseWordPressPost {
     acf?: TeamMemberACF;
+}
+
+interface WordPressDevelopmentPostData extends BaseWordPressPost {
+    acf?: DevelopmentACF;
 }
 
 export interface ResearchItem {
@@ -89,10 +102,19 @@ export interface TeamMemberItem {
     id: number;
     name: string;       // 来自 TeamMemberACF
     role?: string | null;// 来自 TeamMemberACF
-    image?: string | null;// 来自 TeamMemberACF.member_image.url 或占位符
+    image: string;// 来自 TeamMemberACF.member_image.url 或占位符
     is_featured?: boolean; // 来自 TeamMemberACF
+    is_team?: boolean; // 来自 TeamMemberACF
     width?: number | null;
     height?: number | null;
+}
+
+export interface DevelopmentItem {
+    id: number;
+    title: string;
+    url: string | null;
+    description: string | null;
+    image: string;
 }
 
 export async function getResearchData(): Promise<ResearchItem[]> {
@@ -160,6 +182,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
                 journal: item.acf?.journal || null,
                 abstract: item.acf?.abstract || null,
                 url: item.acf?.url || null,
+                pdf: item.acf?.pdf || null,
                 is_selected: item.acf?.is_selected || false,
             };
         });
@@ -194,6 +217,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
                 role: item.acf?.role || null,
                 image: acfImageUrl,
                 is_featured: item.acf?.is_featured || false,
+                is_team: item.acf?.is_team || false,
                 width: width,
                 height: height,
             };
@@ -202,6 +226,37 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
         return teamMembers;
     } catch (error) {
         console.error("Error fetching or processing team members data:", error);
+        return [];
+    }
+}
+
+export async function getDevelopmentData(): Promise<DevelopmentItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp/v2/development`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch development data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data: WordPressDevelopmentPostData[] = await res.json();
+        const developmentItems: DevelopmentItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            return {
+                id: item.id,
+                title: item.acf?.title || 'Untitled Development',
+                url: item.acf?.url || null,
+                description: item.acf?.description || null,
+                image: acfImageUrl,
+            };
+        });
+        return developmentItems;
+    } catch (error) {
+        console.error("Error fetching or processing development data:", error);
         return [];
     }
 }
