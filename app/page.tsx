@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import ResearchSection from "@/components/ResearchSection";
 import PublicationsSection from "@/components/PublicationsSection";
+import DevelopmentSection from "@/components/DevelopmentSection";
 import TeamSection from "@/components/TeamSection";
 import NewsSection from "@/components/NewsSection";
 import JoinSection from "@/components/JoinSection";
@@ -15,6 +16,7 @@ export default async function Home() {
             <HeroSection />
             <ResearchSection />
             <PublicationsSection publications={publicationsData} />
+            <DevelopmentSection />
             <TeamSection /* teamMembers={teamData} */ />
             <NewsSection />
             <JoinSection />

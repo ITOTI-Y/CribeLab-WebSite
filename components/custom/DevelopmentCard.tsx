@@ -1,0 +1,40 @@
+"use client"
+import Image from "next/image";
+import { DevelopmentItem } from "@/lib/api";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+export default function DevelopmentCard({ item }: { item: DevelopmentItem }) {
+
+    return (
+        <div className="flex flex-col w-80 h-108 mx-auto p-2">
+            <div className="relative w-full h-56 mx-auto rounded-lg overflow-hidden mb-6">
+                <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover w-full h-full"
+                />
+            </div>
+            <div>
+                <h3 className='text-2xl font-bold'>
+                    {item.title}
+                </h3>
+                <p className="text-sm text-neutral-200 line-clamp-3 mt-4">
+                    {item.description}
+                </p>
+            </div>
+            <div className="flex justify-start items-center mt-6 group/button">
+                    <Link
+                        href={item.url || ""}
+                        className="inline-flex items-center justify-center mt-3 px-6 py-3 border 
+                        border-white text-sm font-medium rounded-full text-white 
+                        hover:bg-white hover:text-black transition-colors duration-200"
+                    >
+                        LEARN MORE
+                        <ArrowRight className="w-5 h-5 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
+                    </Link>
+                </div>
+        </div>
+    )
+}

@@ -1,7 +1,7 @@
 import { PublicationItem } from "@/lib/api";
 import Image from "next/image";
 import { Textfit } from 'react-textfit';
-import PublicationReadMoreButton from "@/components/publication/PublicationReadMoreButton";
+import ReadMoreMoveButton from "@/components/custom/ReadMoreMoveButton";
 import NextLink from "next/link";
 
 export default function PublicationDetailCard({ publication }: { publication: PublicationItem }) {
@@ -45,7 +45,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                     className="object-hidden" />
             </div>
             <div className="flex justify-between items-center py-8 px-1">
-                <PublicationReadMoreButton
+                <ReadMoreMoveButton
                     href={publication.url || ""}
                     text="Read More"
                 />

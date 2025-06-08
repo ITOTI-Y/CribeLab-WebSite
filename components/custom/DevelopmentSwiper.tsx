@@ -5,16 +5,16 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import ResearchCard from './ResearchCard';
-import { ResearchItem } from '@/lib/api';
+import DevelopmentCard from './DevelopmentCard';
+import { DevelopmentItem } from '@/lib/api';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 
-interface ResearchSliderProps {
-    researchAreas: ResearchItem[];
+interface DevelopmentSliderProps {
+    developmentItems: DevelopmentItem[];
 }
 
-const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
+const DevelopmentSwiper = ({ developmentItems }: DevelopmentSliderProps) => {
     return (
         <div className="relative px-2 lg:px-10 mx-auto group/swiper">
             <Swiper
@@ -26,11 +26,11 @@ const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
                     nextEl: '.research-swiper-button-next',
                     prevEl: '.research-swiper-button-prev',
                 }}
-                className="!pb-12"
+                className="!pb-4"
             >
-                {researchAreas.map((area) => (
-                    <SwiperSlide key={area.id} className="!w-auto h-auto">
-                        <ResearchCard area={area} />
+                {developmentItems.map((item) => (
+                    <SwiperSlide key={item.id} className="!w-auto h-auto">
+                        <DevelopmentCard item={item} />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -50,4 +50,4 @@ const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
     );
 };
 
-export default ResearchSwiper;
+export default DevelopmentSwiper;

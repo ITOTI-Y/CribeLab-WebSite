@@ -32,8 +32,8 @@ export const SelectedCard = ({
                     // 使用 next/image 显示图片
                     <Image
                         src={publication.thumbnail}
-                        alt={publication.title || "Publication thumbnail"} // 使用标题作为 alt 文本，提供默认值
-                        fill // 使用 fill 填充容器
+                        alt={publication.title || "Publication thumbnail"}
+                        fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover" // 保持图片比例并覆盖容器
                     />
@@ -54,11 +54,11 @@ export const SelectedCard = ({
                     >
                         {/* 内容由 dangerouslySetInnerHTML 设置 */}
                     </p>
-                    <p className="mt-1 text-xs text-gray-400 line-clamp-2"> {/* 示例样式 */}
+                    <p className="mt-1 text-xs text-gray-400 line-clamp-2">
                         {publication.summary || "No summary available."}
                     </p>
                 </div>
-                <p className="text-xs text-gray-500"> {/* 示例样式 */}
+                <p className="text-xs text-gray-500">
                     {publication.authors || "Unknown authors"}
                 </p>
             </div>
