@@ -11,7 +11,7 @@ const ResearchSection = async () => {
     const researchData = await getResearchData();
 
     return (
-        <section id="research" className="w-full py-20 bg-black">
+        <section id="research" className="w-full py-20 bg-black overflow-x-hidden">
             <div className="relative font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                 <SubTitle content={subtitle} />
                 <Citation content={citation} />

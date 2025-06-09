@@ -46,6 +46,14 @@ interface DevelopmentACF {
     thumbnail?: ACFImage;
 }
 
+interface NewACF {
+    title?: string;
+    date?: string;
+    url?: string | null;
+    description?: string | null;
+    thumbnail?: ACFImage;
+}
+
 interface BaseWordPressPost {
     id: number;
     title?: { // WP Post 主 title
@@ -73,6 +81,10 @@ interface WordPressTeamMemberPostData extends BaseWordPressPost {
 
 interface WordPressDevelopmentPostData extends BaseWordPressPost {
     acf?: DevelopmentACF;
+}
+
+interface WordPressNewPostData extends BaseWordPressPost {
+    acf?: NewACF;
 }
 
 export interface ResearchItem {
@@ -116,6 +128,15 @@ export interface TeamMemberItem {
 export interface DevelopmentItem {
     id: number;
     title: string;
+    url: string | null;
+    description: string | null;
+    image: string;
+}
+
+export interface NewItem {
+    id: number;
+    title: string;
+    date: string | null;
     url: string | null;
     description: string | null;
     image: string;
@@ -262,6 +283,38 @@ export async function getDevelopmentData(): Promise<DevelopmentItem[]> {
         return developmentItems;
     } catch (error) {
         console.error("Error fetching or processing development data:", error);
+        return [];
+    }
+}
+
+export async function getNewsData(): Promise<NewItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp/v2/new`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch news data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data: WordPressNewPostData[] = await res.json();
+        const newsItems: NewItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            return {
+                id: item.id,
+                title: item.acf?.title || 'Untitled New',
+                date: item.acf?.date || null,
+                url: item.acf?.url || null,
+                description: item.acf?.description || null,
+                image: acfImageUrl,
+            };
+        });
+        return newsItems;
+    } catch (error) {
+        console.error("Error fetching or processing news data:", error);
         return [];
     }
 }

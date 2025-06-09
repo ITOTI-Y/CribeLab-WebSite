@@ -14,7 +14,7 @@ export default function DevelopmentCard({ item }: { item: DevelopmentItem }) {
                     alt={item.title}
                     fill
                     className="object-cover w-full h-full"
-                    sizes="100vw"
+                    sizes="99vw"
                 />
             </div>
             <div>

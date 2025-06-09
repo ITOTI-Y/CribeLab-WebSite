@@ -12,7 +12,7 @@ interface PublicationsSectionProps {
 }
 
 const PublicationsSection = ({ publications }: PublicationsSectionProps) => {
-    const subtitle = "Publications";
+    const subtitle = "PUBLICATIONS";
     const selectedPublications = publications
         .filter((pub) => pub.is_selected)
         .slice(0, 5);

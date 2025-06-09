@@ -21,7 +21,7 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
                 <h3 className="text-xl w-fit font-semibold text-white">
                     All Publications
                 </h3>
-                <div className="grid grid-cols-7 gap-x-2 gap-y-1">
+                <div className="grid grid-cols-4 md:grid-cols-9 gap-x-2 gap-y-1">
                     <button
                         onClick={() => setSelectedYear("all")}
                         className={`px-2 py-1 rounded-md text-sm ${selectedYear === "all" ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}

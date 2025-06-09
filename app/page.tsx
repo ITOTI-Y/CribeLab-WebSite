@@ -3,7 +3,7 @@ import ResearchSection from "@/components/ResearchSection";
 import PublicationsSection from "@/components/PublicationsSection";
 import DevelopmentSection from "@/components/DevelopmentSection";
 import TeamSection from "@/components/TeamSection";
-import NewsSection from "@/components/NewsSection";
+import NewsSection from "@/components/NewsSection"; // eslint-disable-line
 import JoinSection from "@/components/JoinSection";
 import { getPublicationsData } from "@/lib/api";
 
@@ -18,7 +18,7 @@ export default async function Home() {
             <PublicationsSection publications={publicationsData} />
             <DevelopmentSection />
             <TeamSection /* teamMembers={teamData} */ />
-            <NewsSection />
+            {/* <NewsSection /> */}
             <JoinSection />
         </main>
     );

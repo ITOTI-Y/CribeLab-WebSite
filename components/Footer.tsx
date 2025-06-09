@@ -1,5 +1,5 @@
-import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/custom/Logo";
+import { MapPin } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -19,24 +19,6 @@ const Footer = () => {
                             <span className="text-sm">
                                 School of Architecture, Design and Planning, University Campus
                             </span>
-                        </div>
-                        <div className="flex items-center space-x-3 text-gray-300">
-                            <Mail size={18} className="text-gray-400" />
-                            <a
-                                href="mailto:contact@cribelab.edu"
-                                className="text-sm hover:text-white transition-colors"
-                            >
-                                contact@cribelab.edu
-                            </a>
-                        </div>
-                        <div className="flex items-center space-x-3 text-gray-300">
-                            <Phone size={18} className="text-gray-400" />
-                            <a
-                                href="tel:+1234567890"
-                                className="text-sm hover:text-white transition-colors"
-                            >
-                                +1 (234) 567-890
-                            </a>
                         </div>
                     </div>
                 </div>

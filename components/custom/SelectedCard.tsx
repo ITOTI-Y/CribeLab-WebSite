@@ -30,7 +30,7 @@ export const SelectedCard = ({
                         src={publication.thumbnail}
                         alt={publication.title || "Publication thumbnail"}
                         fill
-                        sizes="100vw"
+                        sizes="99vw"
                         className="object-cover"
                     />
                 ) : (
