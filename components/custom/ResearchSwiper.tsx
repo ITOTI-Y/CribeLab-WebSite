@@ -21,7 +21,9 @@ const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
                 modules={[Navigation]}
                 spaceBetween={20}
                 slidesPerView={"auto"}
+                freeMode={true}
                 loop={true}
+                grabCursor={true}
                 navigation={{
                     nextEl: '.research-swiper-button-next',
                     prevEl: '.research-swiper-button-prev',

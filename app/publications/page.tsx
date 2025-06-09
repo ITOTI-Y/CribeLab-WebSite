@@ -1,4 +1,3 @@
-// TODO: 完成Publication页面
 import { Metadata } from 'next';
 import { getPublicationsData } from "@/lib/api";
 import PublicationFrame from '@/components/publication/PublicationFrame';
