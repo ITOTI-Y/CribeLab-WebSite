@@ -14,13 +14,14 @@ export default function DevelopmentCard({ item }: { item: DevelopmentItem }) {
                     alt={item.title}
                     fill
                     className="object-cover w-full h-full"
+                    sizes="100vw"
                 />
             </div>
             <div>
-                <h3 className='text-2xl font-bold'>
+                <h3 className='text-2xl font-bold line-clamp-1'>
                     {item.title}
                 </h3>
-                <p className="text-sm text-neutral-200 line-clamp-3 mt-4">
+                <p className="text-sm text-neutral-200 line-clamp-2 mt-4">
                     {item.description}
                 </p>
             </div>

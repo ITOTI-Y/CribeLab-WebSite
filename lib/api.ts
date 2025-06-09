@@ -1,4 +1,6 @@
 // lib/api.ts
+// TODO:Publications 只能返回100条数据，由于per_page=100
+// TODO:其余API 也需要解决分页问题
 
 interface ACFImage {
     url?: string;
@@ -34,6 +36,7 @@ interface TeamMemberACF {
     is_featured?: boolean;
     member_image?: ACFImage | null;
     is_team?: boolean;
+    description?: string | null;
 }
 
 interface DevelopmentACF {
@@ -107,6 +110,7 @@ export interface TeamMemberItem {
     is_team?: boolean; // 来自 TeamMemberACF
     width?: number | null;
     height?: number | null;
+    description?: string | null;
 }
 
 export interface DevelopmentItem {
@@ -220,6 +224,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
                 is_team: item.acf?.is_team || false,
                 width: width,
                 height: height,
+                description: item.acf?.description || null,
             };
         });
 

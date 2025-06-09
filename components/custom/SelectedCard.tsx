@@ -24,35 +24,28 @@ export const SelectedCard = ({
 }: SelectedCardProps) => {
     return (
         <Link href={publication.url || "#"} className={`overflow-hidden hover:opacity-80 transition-opacity duration-300 flex flex-row w-full items-start gap-4 relative ${className}`}>
-            {/* 3. 图片容器 */}
             <div className="flex w-40 h-32 bg-neutral-800 relative overflow-hidden rounded-sm">
-                {" "}
-                {/* 添加 flex-shrink-0 防止被压缩, overflow-hidden 和背景色 */}
                 {publication.thumbnail ? (
-                    // 使用 next/image 显示图片
                     <Image
                         src={publication.thumbnail}
                         alt={publication.title || "Publication thumbnail"}
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover" // 保持图片比例并覆盖容器
+                        sizes="100vw"
+                        className="object-cover"
                     />
                 ) : (
-                    // 如果没有图片，可以显示占位符或留空
                     <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
                         No Image
                     </div>
                 )}
             </div>
 
-            {/* 4. 文本内容 */}
             <div className="flex-1 flex flex-col justify-between h-32 pt-1">
                 <div>
                     <p
-                        className="font-medium text-sm text-white leading-snug" // 例如：中等字重、小号字体、白色、行距紧凑
+                        className="font-medium text-sm text-white leading-snug"
                         dangerouslySetInnerHTML={renderHTML(publication.title)}
                     >
-                        {/* 内容由 dangerouslySetInnerHTML 设置 */}
                     </p>
                     <p className="mt-1 text-xs text-gray-400 line-clamp-2">
                         {publication.summary || "No summary available."}

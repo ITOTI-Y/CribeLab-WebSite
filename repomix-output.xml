@@ -1414,7 +1414,6 @@ export async function getMeanData(): Promise<MeanItem[]> {
 </file>
 
 <file path="app/page.tsx">
-// TODO: 完成Publication页面
 
 import HeroSection from "@/components/HeroSection";
 import ResearchSection from "@/components/ResearchSection";
