@@ -8,11 +8,12 @@ const ResearchCard = ({ area }: { area: ResearchItem }) => {
     return (
         <div className="bg-black border border-neutral-700 
             w-80 h-136 flex flex-col rounded-lg text-white shadow-md p-6">
-            <div className="relative w-64 h-64 rounded-lg mb-6">
+            <div className="relative w-full h-64 rounded-lg mb-6">
                 <Image
                     src={area.image}
                     alt={area.title}
                     fill
+                    sizes="99vw"
                     className="object-cover w-full h-full rounded-lg"
                 />
             </div>
