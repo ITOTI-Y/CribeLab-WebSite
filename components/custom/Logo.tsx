@@ -12,7 +12,7 @@ export default function Logo() {
           alt="CRIBE Lab Logo"
           width={32}
           height={32}
-          className="h-8 w-8"
+          className="h-8 w-12"
         />
 
         <span className="ml-2 text-xl font-roboto text-white font-bold">
