@@ -120,3 +120,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.amap-logo {
+  display: none !important;
+}
+.amap-copyright {
+  display: none !important;
+}
