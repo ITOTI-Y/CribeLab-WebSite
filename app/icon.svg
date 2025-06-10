@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon_black" data-name="icon_black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474.3 541.05">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: ArialMT, Arial;
+        font-size: 82px;
+        isolation: isolate;
+        letter-spacing: .07em;
+      }
+    </style>
+  </defs>
+  <g id="icon_black" data-name="icon_black">
+    <rect x="204.8" y="214.91" width="64.69" height="139.37"/>
+    <circle cx="237.15" cy="150.23" r="32.34" transform="translate(-43.07 167.02) rotate(-35.78)"/>
+    <path d="M270.72,397.36c88.31,0,163.95-63.23,179.6-150.15h-44c-14.98,62.74-71.06,107-135.56,107h-64.68c-76.96.03-139.38-62.34-139.42-139.3,0-94.83,76.86-171.72,171.69-171.73,82.37,0,153.15,58.48,168.66,139.39h43.75C432.93,65.27,323.38-15.36,206.08,2.47,101.09,18.43,23.51,108.71,23.54,214.91c.02,100.79,81.74,182.47,182.53,182.45h64.65Z"/>
+    <text class="cls-1" transform="translate(0 514.42)"><tspan x="0" y="0">CRIBE LAB</tspan></text>
+  </g>
+</svg>

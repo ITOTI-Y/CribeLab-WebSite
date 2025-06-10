@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 export const metadata: Metadata = {
-    title: "Cribelab",
+    title: "CribeLab",
     description: "LAB OF CLIMATE RESPONSIVE AND INTELLIGENT BUILT ENVIRONMENT",
 };
 export default function RootLayout({
