@@ -1,4 +1,5 @@
 import { getResearchData } from "@/lib/api";
+import ReadMoreButton from "@/components/custom/ReadMoreButton";
 
 export default async function ResearchDetailPage({ params }: { params: { id: string } }) {
   const all = await getResearchData();
@@ -25,6 +26,10 @@ export default async function ResearchDetailPage({ params }: { params: { id: str
         <div className="flex flex-col justify-center flex-1">
           <h1 className="text-2xl font-bold text-white mb-4">{detail.title}</h1>
           <div className="text-neutral-300 text-base">{detail.description}</div>
+          {/* Read More 按钮 */}
+          <div className="flex justify-end mt-8">
+            <ReadMoreButton href={`/research/${detail.id}/detail`} text="Read More" />
+          </div>
         </div>
       </div>
     </div>
