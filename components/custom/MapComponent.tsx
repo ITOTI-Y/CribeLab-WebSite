@@ -1,9 +1,13 @@
 'use client'
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef} from 'react';
 import { Map, APILoader, type MapProps } from '@uiw/react-amap';
 import { Home } from 'lucide-react'; // 可选：使用图标
 
 const API_KEY = process.env.NEXT_PUBLIC_AMAP_KEY;
+
+// 将常量移到组件外部，避免依赖问题
+const INITIAL_CENTER: [number, number] = [113.970741, 22.590652];
+const INITIAL_ZOOM = 18;
 
 // The defaultType prop is not included in the official MapProps, so we extend it.
 interface CustomMapProps extends MapProps {
@@ -13,20 +17,26 @@ interface CustomMapProps extends MapProps {
     defaultType?: number;
 }
 
+// 可选：更严格的类型定义
+interface AmapRef {
+  map: {
+    setCenter: (center: [number, number]) => void;
+    setZoom: (zoom: number) => void;
+    panTo: (center: [number, number]) => void;
+  };
+}
+
 export default function MapComponent() {
-    const mapRef = useRef<any>(null);
+    // 修复类型定义：使用正确的 ref 类型
+    const mapRef = useRef<AmapRef | null>(null);
     
-    // 定义初始位置常量
-    const INITIAL_CENTER: [number, number] = [113.970741, 22.590652];
-    const INITIAL_ZOOM = 18;
-    
-    // 将 useMemo 移到组件顶部，在任何条件返回之前
+    // 修复 useMemo 依赖问题：由于常量已移到组件外部，不再需要依赖数组
     const mapOptions: CustomMapProps = useMemo(() => ({
         zoom: INITIAL_ZOOM,
         center: INITIAL_CENTER,
         lang: "en",
         defaultType: 1,
-    }), []); // 空依赖数组意味着它只会在组件首次渲染时创建一次
+    }), []); // 现在可以安全使用空依赖数组
 
     // 重置到初始位置的函数
     const resetToInitialPosition = () => {
