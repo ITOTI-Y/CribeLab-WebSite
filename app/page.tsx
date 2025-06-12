@@ -1,4 +1,4 @@
-// TODO: 更换favicon，Cribelab 的 L 大写，换为Email,scopus, Google Scholar, Team，Research，Development子页面
+// TODO: 换为Email,scopus, Google Scholar, Team，Research，Development子页面
 // TODO: 中文界面
 
 import HeroSection from "@/components/HeroSection";
