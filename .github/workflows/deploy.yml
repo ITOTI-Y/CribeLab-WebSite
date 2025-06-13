@@ -37,10 +37,10 @@ jobs:
             git pull origin master
 
             echo "Installing dependencies..."
-            bun install --frozen-lockfile
+            /home/ubuntu/.bun/bin/bun install --frozen-lockfile
 
             echo "Building project..."
-            bun run build
+            /home/ubuntu/.bun/bin/bun run build
 
             echo "Restarting application with PM2..."
-            pm2 reload cribelab-website || pm2 restart cribelab-website
+            /home/ubuntu/.bun/bin/pm2 reload cribelab-website || /home/ubuntu/.bun/bin/pm2 restart cribelab-website
