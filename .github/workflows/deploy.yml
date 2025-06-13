@@ -31,31 +31,16 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
-
             set -e
 
-            BUN_PATH=/home/ubuntu/.bun/bin/bun
-            NODE_PATH=/home/ubuntu/.nvm/versions/node/v22.16.0/bin/node
-            PM2_PATH=/home/ubuntu/.bun/bin/pm2
-
             cd ${{ secrets.WORK_DIR }}
-            echo "✅ In directory $(pwd)"
 
-            echo "🔄 Pulling latest code..."
-            git fetch origin
+            echo "🔄 Pulling latest code from repository..."
+            git fetch origin master
             git reset --hard origin/master
 
-            echo "📦 Installing dependencies..."
-            $BUN_PATH install --frozen-lockfile
+            echo "🔑 Granting execute permission to deploy script..."
+            chmod +x ./deploy.sh
 
-            echo "🏗️ Building project..."
-            $BUN_PATH run build
-
-            echo "🚀 Restarting application with PM2..."
-            APP_NAME="cribelab-website"
-            $PM2_PATH delete $APP_NAME || true
-            $PM2_PATH start $BUN_PATH --name $APP_NAME --interpreter $NODE_PATH -- start
-
-            $PM2_PATH save
-
-            echo "🎉 Deployment successful!"
+            echo "🚀 Executing deployment script..."
+            ./deploy.sh
