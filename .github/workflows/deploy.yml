@@ -54,6 +54,8 @@ jobs:
             echo "🚀 Restarting application with PM2..."
             APP_NAME="cribelab-website"
             $PM2_PATH delete $APP_NAME || true
-            $PM2_PATH start $BUN_PATH --name $APP_NAME -- start
+            $PM2_PATH start $BUN_PATH --name $APP_NAME --interpreter $NODE_PATH -- start
+
+            $PM2_PATH save
 
             echo "🎉 Deployment successful!"
