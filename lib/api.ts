@@ -1,5 +1,5 @@
 // lib/api.ts
-// TODO:Publications 只能返回100条数据，由于per_page=100
+// TODO:Publications, TeamMembers 只能返回100条数据，由于per_page=100
 // TODO:其余API 也需要解决分页问题
 
 const placeholderImage = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-content/uploads/2025/02/placeholder-1.svg`;
@@ -226,7 +226,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp-json/wp/v2/member`;
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/member?per_page=100`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
