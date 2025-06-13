@@ -2,6 +2,8 @@
 // TODO:Publications 只能返回100条数据，由于per_page=100
 // TODO:其余API 也需要解决分页问题
 
+const placeholderImage = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-content/uploads/2025/02/placeholder-1.svg`;
+
 interface ACFImage {
     url?: string;
     width?: number;
@@ -148,7 +150,7 @@ export async function getResearchData(): Promise<ResearchItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp/v2/research`; // 假设 'research' 是你的自定义帖子类型 slug
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/research`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -158,10 +160,10 @@ export async function getResearchData(): Promise<ResearchItem[]> {
         // 使用更具体的类型
         const data: WordPressResearchPostData[] = await res.json();
         const researchItems: ResearchItem[] = data.map((item) => {
-            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
             return {
                 id: item.id,
-                title: item.acf?.title || 'Untitled Research', // 使用 ResearchACF.title (ACF 字段)
+                title: item.acf?.title || 'Untitled Research',
                 description: item.acf?.description || null,
                 image: acfImageUrl, // image 现在直接使用 acfImageUrl
                 width: item.acf?.thumbnail?.width || undefined,
@@ -183,7 +185,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
         return [];
     }
 
-    const fetchUrl = `${apiUrl}/wp/v2/publication?_embed&orderby=date&order=desc&per_page=100`;
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/publication?_embed&orderby=date&order=desc&per_page=100`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -194,7 +196,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
         const data: WordPressPublicationPostData[] = await res.json();
 
         const publications: PublicationItem[] = data.map((item) => {
-            const acfThumbnailUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const acfThumbnailUrl = item.acf?.thumbnail?.url || placeholderImage;
             return {
                 id: item.id,
                 categories: item.acf?.categories || 'Unknown Category',
@@ -224,7 +226,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp/v2/member`;
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/member`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -233,7 +235,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
         }
         const data: WordPressTeamMemberPostData[] = await res.json();
         const teamMembers: TeamMemberItem[] = data.map((item) => {
-            const acfImageUrl = item.acf?.member_image?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const acfImageUrl = item.acf?.member_image?.url || placeholderImage;
             const width = item.acf?.member_image?.width || null;
             const height = item.acf?.member_image?.height || null;
             return {
@@ -262,7 +264,7 @@ export async function getDevelopmentData(): Promise<DevelopmentItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp/v2/development`;
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/development`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -271,7 +273,7 @@ export async function getDevelopmentData(): Promise<DevelopmentItem[]> {
         }
         const data: WordPressDevelopmentPostData[] = await res.json();
         const developmentItems: DevelopmentItem[] = data.map((item) => {
-            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
             return {
                 id: item.id,
                 title: item.acf?.title || 'Untitled Development',
@@ -293,7 +295,7 @@ export async function getNewsData(): Promise<NewItem[]> {
         console.error("WordPress API URL is not configured in .env.local");
         return [];
     }
-    const fetchUrl = `${apiUrl}/wp/v2/new`;
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/new`;
     try {
         const res = await fetch(fetchUrl);
         if (!res.ok) {
@@ -302,7 +304,7 @@ export async function getNewsData(): Promise<NewItem[]> {
         }
         const data: WordPressNewPostData[] = await res.json();
         const newsItems: NewItem[] = data.map((item) => {
-            const acfImageUrl = item.acf?.thumbnail?.url || "https://www.cribelab.org/wp-content/uploads/2025/02/placeholder-1.svg";
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
             return {
                 id: item.id,
                 title: item.acf?.title || 'Untitled New',

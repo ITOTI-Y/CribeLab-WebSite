@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'www.cribelab.org',
+                hostname: 'data.cribelab.org',
             },
             {
                 protocol: 'https',

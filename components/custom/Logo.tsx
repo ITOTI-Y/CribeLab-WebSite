@@ -3,12 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+
 export default function Logo() {
   return (
     <div className="flex items-center">
       <Link href="/" className="flex items-center">
         <Image
-          src="https://www.cribelab.org/wp-content/uploads/2025/04/LOGO.svg"
+          src={`${apiUrl}/wp-content/uploads/2025/04/LOGO.svg`}
           alt="CRIBE Lab Logo"
           width={32}
           height={32}
