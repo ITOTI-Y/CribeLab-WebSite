@@ -18,16 +18,6 @@ export default async function DevelopmentSection() {
                 <SubTitle content={subtitle} />
                 <Citation content={citation} />
                 <DevelopmentSwiper developmentItems={developmentData} />
-                {/* <div className="flex justify-center items-center mt-5">
-                    <Link
-                        href={`/development`}
-                        className="inline-flex items-center justify-center mt-3 px-6 py-3 border 
-                        border-white text-md font-medium rounded-full bg-white text-black "
-                    >
-                        Discover more our Development
-                        <ArrowRight className="w-5 h-5 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
-                    </Link>
-                </div> */}
             </div>
         </section>
     )

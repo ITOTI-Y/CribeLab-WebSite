@@ -6,7 +6,7 @@ import { getResearchData } from "@/lib/api";
 
 const ResearchSection = async () => {
     const citation =
-        "Our Lab Focuses On Advancing Building Performance, Thermal Comfort, And Sustainability In The Context Of Changing Urban Environments And Climate Dynamics.";
+        "Our lab focuses on advancing building performance, thermal comfort, and sustainability in the context of changing urban environments and climate dynamics.";
     const subtitle = "RESEARCH";
     const researchData = await getResearchData();
 
