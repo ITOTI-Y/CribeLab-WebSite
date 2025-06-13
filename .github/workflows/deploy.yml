@@ -15,6 +15,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug SSH Secrets
+        run: |
+          echo "Host: ${{ secrets.SERVER_HOST }}"
+          echo "User: ${{ secrets.SERVER_USER }}"
+          echo "Work Dir: ${{ secrets.WORK_DIR }}"
+          echo "Private Key Length: ${{ env.KEY_LENGTH }}"
+        env:
+          KEY_LENGTH: ${{ join(secrets.SERVER_SSH_PRIVATE_KEY, '') }} 
+
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
