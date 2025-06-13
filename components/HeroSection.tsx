@@ -4,7 +4,7 @@ const HeroSection = () => {
             id="home"
             className="w-full h-screen flex flex-col items-center justify-center bg-black pt-16"
         >
-            <div className="w-full h-full mx-auto bg-neutral-400">
+            <div className="w-full h-full mx-auto">
                 <div className="flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
                     <h1 className="text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 lg:px-8 font-roboto font-extrabold text-white leading-tight tracking-wide">
                         Creating Smart-Driven Climate-Resilient Buildings and Cities
