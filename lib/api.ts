@@ -333,8 +333,8 @@ export async function getMeanData(): Promise<MeanItem[]> {
         { id: 'mean-home', label: 'Home', href: 'home', sub_href: '/#home' },
         { id: 'mean-research', label: 'Research', href: 'research', sub_href: '/#research' },
         { id: 'mean-publications', label: 'Publications', href: 'publications', sub_href: '/#publications' },
+        { id: 'mean-development', label: 'Development', href: 'development', sub_href: '/#development' },
         { id: 'mean-team', label: 'Team', href: 'team', sub_href: '/#team' },
-        { id: 'mean-news', label: 'News', href: 'news', sub_href: '/#news' },
         { id: 'mean-join', label: 'Join Us', href: 'join', sub_href: '/#join' },
     ];
     return meanitems;
