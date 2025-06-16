@@ -1,5 +1,4 @@
 import Logo from "@/components/custom/Logo";
-import { MapPin } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -8,17 +7,13 @@ const Footer = () => {
                 <div className="flex gap-12 lg:gap-36 items-center justify-center">
                     <div className="flex flex-col items-start space-y-4 w-fit">
                         <Logo />
-                        <p className="font-Roboto text-sm text-gray-400">
-                            © 2025 Climate Responsive and Intelligent Built Environment Lab
-                        </p>
                     </div>
 
                     <div className="flex flex-col items-start space-y-4">
                         <div className="flex items-center space-x-3 text-gray-300">
-                            <MapPin size={18} className="text-gray-400" />
-                            <span className="text-sm">
-                                School of Architecture, Design and Planning, University Campus
-                            </span>
+                            <p className="font-Roboto text-sm text-gray-400">
+                                Climate Responsive and Intelligent Built Environment Lab™
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,7 @@
 import Citation from "./custom/Citation";
 import SubTitle from "./custom/SubTitle";
 import DevelopmentSwiper from "./custom/DevelopmentSwiper";
-import Link from "next/link"; // eslint-disable-line
-import { ArrowRight } from "lucide-react"; // eslint-disable-line
+import DevelopmentButton from "./custom/DevelopmentButton";
 import { getDevelopmentData } from "@/lib/api";
 
 
@@ -18,6 +17,7 @@ export default async function DevelopmentSection() {
                 <SubTitle content={subtitle} />
                 <Citation content={citation} />
                 <DevelopmentSwiper developmentItems={developmentData} />
+                <DevelopmentButton href="/development" content="Discover more" className="mt-3" />
             </div>
         </section>
     )

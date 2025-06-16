@@ -21,6 +21,7 @@ const DevelopmentSwiper = ({ developmentItems }: DevelopmentSliderProps) => {
                 modules={[Navigation]}
                 spaceBetween={20}
                 slidesPerView={"auto"}
+                grabCursor={true}
                 loop={true}
                 navigation={{
                     nextEl: '.research-swiper-button-next',

@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytic";
 
 export const metadata: Metadata = {
-    title: "CribeLab",
+    title: "CRIBE Lab",
     description: "LAB OF CLIMATE RESPONSIVE AND INTELLIGENT BUILT ENVIRONMENT",
 };
 export default function RootLayout({
