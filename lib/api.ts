@@ -2,7 +2,7 @@
 // TODO:Publications, TeamMembers 只能返回100条数据，由于per_page=100
 // TODO:其余API 也需要解决分页问题
 
-const placeholderImage = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-content/uploads/2025/02/placeholder-1.svg`;
+export const placeholderImage = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-content/uploads/2025/02/placeholder-1.svg`;
 
 interface ACFImage {
     url?: string;

@@ -1,15 +1,34 @@
 "use client"
 
+import { useState } from "react";
 import { DevelopmentItem } from "@/lib/api";
 import { ExternalLink, Zap } from 'lucide-react';
+import DevelopmentDetailModal from "./DevelopmentDetailModal";
 import Link from "next/link";
 import Image from "next/image";
 
+
 export default function DevelopmentGrid({ developmentData }: { developmentData: DevelopmentItem[] }) {
+    const [selectedProject, setSelectedProject] = useState<DevelopmentItem | null>(null);
+
+    const handleOpenModal = (project: DevelopmentItem) => {
+        setSelectedProject(project);
+    }
+
+    const handleCloseModal = () => {
+        setSelectedProject(null);
+    }
+
     return (
-        <section className="w-full h-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-y-8 gap-x-8 p-8">
+        <section className="w-full h-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-8 p-8">
             {developmentData.map((item) => (
-                <div key={item.id} className="relative bg-gray-900 rounded-lg w-full cursor-pointer border-[1px] border-gray-600 overflow-hidden group
+                <div 
+                key={item.id}
+                onClick={() => handleOpenModal(item)}
+                onKeyDown={(e) => e.key === "Enter" && handleOpenModal(item)}
+                role="button"
+                tabIndex={0}
+                className="relative bg-gray-900 rounded-lg w-full cursor-pointer border-[1px] border-gray-600 overflow-hidden group
                 hover:-translate-y-2 hover:shadow-purple-500/20 hover:shadow-2xl transition-all duration-300">
                     <div className="relative top-0 left-0 w-full h-48 overflow-hidden">
                         <Image src={item.image} alt={item.title} fill sizes="99vw" className="object-cover transition-all opacity-90 duration-300 group-hover:scale-105 group-hover:opacity-100" />
@@ -42,6 +61,11 @@ export default function DevelopmentGrid({ developmentData }: { developmentData: 
                     </div>
                 </div>
             ))}
+            <DevelopmentDetailModal 
+                isOpen={!!selectedProject}
+                onClose={handleCloseModal}
+                project={selectedProject}
+            />
         </section>
     )
 }

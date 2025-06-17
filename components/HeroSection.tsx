@@ -1,11 +1,15 @@
+import VideoBackground from "./custom/VideoBackground";
+
 const HeroSection = () => {
     return (
         <section
             id="home"
-            className="w-full h-screen flex flex-col items-center justify-center bg-black pt-16"
+            className="relative w-full h-screen flex flex-col items-center bg-black justify-center pt-16"
         >
-            <div className="w-full h-full mx-auto">
-                <div className="flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
+            <VideoBackground />
+            <div className="relative w-full h-full mx-auto">
+                
+                <div className="relative z-20 flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
                     <h1 className="text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 lg:px-8 font-roboto font-extrabold text-white leading-tight tracking-wide">
                         Creating smart-driven climate-resilient buildings and cities
                     </h1>
@@ -14,7 +18,7 @@ const HeroSection = () => {
                     </p>
                 </div>
             </div>
-            <div className="w-full flex items-center flex-col lg:flex-row p-4 lg:p-20 gap-4 lg:gap-0">
+            <div className="relative z-20 w-full flex items-center flex-col lg:flex-row p-4 lg:p-20 gap-4 lg:gap-0">
                 <div className="w-full text-center lg:w-2/5">
                     <h2 className="text-xl lg:text-4xl font-bold">
                         OUR MISSION
