@@ -34,7 +34,7 @@ interface TeamMemberACF {
     name?: string | null;
     role?: string | null;
     is_featured?: boolean;
-    member_image?: ACFImage | null;
+    thumbnail?: ACFImage | null;
     is_team?: boolean;
     description?: string | null;
 }
@@ -253,7 +253,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
     const data = await fetchAllPages<WordPressTeamMemberPostData>(baseUrl);
 
     return data.map((item) => {
-        const acfImageUrl = item.acf?.member_image?.url || placeholderImage;
+        const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
         return {
             id: item.id,
             name: item.acf?.name || item.title?.rendered || 'Unknown Member',
@@ -261,8 +261,8 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
             image: acfImageUrl,
             is_featured: item.acf?.is_featured || false,
             is_team: item.acf?.is_team || false,
-            width: item.acf?.member_image?.width || null,
-            height: item.acf?.member_image?.height || null,
+            width: item.acf?.thumbnail?.width || null,
+            height: item.acf?.thumbnail?.height || null,
             description: item.acf?.description || null,
         };
     });
