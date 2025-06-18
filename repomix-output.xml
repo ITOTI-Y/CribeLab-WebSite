@@ -1,0 +1,2624 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: app/, components/, lib/, types/
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/development/page.tsx
+app/globals.css
+app/icon.svg
+app/layout.tsx
+app/page.tsx
+app/publications/page.tsx
+app/research/[id]/detail/page.tsx
+app/research/[id]/page.tsx
+app/team/page.tsx
+components/custom/AllPublicationFrame.tsx
+components/custom/Citation.tsx
+components/custom/DevelopmentButton.tsx
+components/custom/DevelopmentCard.tsx
+components/custom/DevelopmentSwiper.tsx
+components/custom/FeaturedMemberCard.tsx
+components/custom/Logo.tsx
+components/custom/MapComponent.tsx
+components/custom/Navigation.tsx
+components/custom/NavigationButton.tsx
+components/custom/NewCard.tsx
+components/custom/ReadMoreButton.tsx
+components/custom/ReadMoreMoveButton.tsx
+components/custom/ResearchCard.tsx
+components/custom/ResearchSwiper.tsx
+components/custom/SelectedCard.tsx
+components/custom/SelectedPublicationFrame.tsx
+components/custom/SubTitle.tsx
+components/custom/VerticalMenu.tsx
+components/custom/VideoBackground.tsx
+components/development/DevelopmentDetailModal.tsx
+components/development/DevelopmentGridCard.tsx
+components/DevelopmentSection.tsx
+components/Footer.tsx
+components/GoogleAnalytic.tsx
+components/Header.tsx
+components/HeroSection.tsx
+components/JoinSection.tsx
+components/NewsSection.tsx
+components/publication/PublicationDetailCard.tsx
+components/publication/PublicationFrame.tsx
+components/publication/YearSelector.tsx
+components/PublicationsSection.tsx
+components/ResearchSection.tsx
+components/team/MemberCard.tsx
+components/TeamSection.tsx
+components/ui/scroll-area.tsx
+lib/api.ts
+lib/gtag.ts
+lib/utils.ts
+types/gtag.d.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="app/development/page.tsx">
+import { getDevelopmentData } from '@/lib/api';
+import DevelopmentGrid from '@/components/development/DevelopmentGridCard';
+import { Code} from 'lucide-react';
+
+export default async function DevelopmentPage() {
+    const developmentData = await getDevelopmentData();
+    
+    return (
+        <main className="flex flex-col min-h-screen items-center bg-black pt-16 text-white">
+            <div className="flex flex-col lg:flex-row items-center justify-center pt-8 lg:pt-16 gap-2">
+                <div className="flex items-center gap-4">
+                    <Code className="w-8 h-8 lg:w-12 lg:h-12 text-purple-400" />
+                    <h1 className="text-2xl lg:text-4xl font-bold text-center">
+                        Discover our
+                    </h1>
+                </div>
+                <span className="text-2xl lg:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+                    development projects
+                </span>
+            </div>
+            <DevelopmentGrid developmentData={developmentData} />
+        </main>
+    )
+}
+</file>
+
+<file path="app/icon.svg">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon_black" data-name="icon_black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474.3 541.05">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: ArialMT, Arial;
+        font-size: 82px;
+        isolation: isolate;
+        letter-spacing: .07em;
+      }
+    </style>
+  </defs>
+  <g id="icon_black" data-name="icon_black">
+    <rect x="204.8" y="214.91" width="64.69" height="139.37"/>
+    <circle cx="237.15" cy="150.23" r="32.34" transform="translate(-43.07 167.02) rotate(-35.78)"/>
+    <path d="M270.72,397.36c88.31,0,163.95-63.23,179.6-150.15h-44c-14.98,62.74-71.06,107-135.56,107h-64.68c-76.96.03-139.38-62.34-139.42-139.3,0-94.83,76.86-171.72,171.69-171.73,82.37,0,153.15,58.48,168.66,139.39h43.75C432.93,65.27,323.38-15.36,206.08,2.47,101.09,18.43,23.51,108.71,23.54,214.91c.02,100.79,81.74,182.47,182.53,182.45h64.65Z"/>
+    <text class="cls-1" transform="translate(0 514.42)"><tspan x="0" y="0">CRIBE LAB</tspan></text>
+  </g>
+</svg>
+</file>
+
+<file path="app/team/page.tsx">
+import { getTeamMembersData } from "@/lib/api";
+import MemberCard from "@/components/team/MemberCard";
+
+export default async function TeamPage() {
+    const teamMembersData = await getTeamMembersData();
+    const teamMembers = teamMembersData.filter((member) => !member.is_team && !member.is_featured);
+    const teamLeaders = teamMembersData.filter((member) => member.is_featured);
+
+    return (
+        <div className="min-h-screen w-full bg-black text-white pt-16 font-roboto">
+            <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 pb-16">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold p-6 text-center sm:text-start">
+                    Team Members
+                </h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {teamLeaders.map((member) => (
+                        <MemberCard key={member.id} member={member} />
+                    ))}
+                    {teamMembers.map((member) => (
+                        <MemberCard key={member.id} member={member} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+</file>
+
+<file path="components/custom/DevelopmentButton.tsx">
+import React from "react";
+import Link from "next/link";
+
+interface ButtonProps {
+    href: string;
+    content: string;
+    className?: string;
+}
+
+const DevelopmentButton: React.FC<ButtonProps> = ({ href, content, className }) => {
+    return (
+        <div className={`${className} w-full flex justify-center items-center`}>
+            <div className="font-bold text-xl relative group">
+                <div className="absolute left-0 bottom-0.5 w-full h-full bg-black group-hover:-translate-y-full transition-all duration-300 ease-in-out" />
+                <div className="absolute left-1.5 right-1.5 bottom-0.5 h-full bg-black delay-200 group-hover:scale-x-0 transition-all duration-300" />
+
+                <Link href={href}>
+                <div className="mx-1 border-2">
+                    <p className="relative mx-3 my-3 z-50">
+                        {content}
+                    </p>
+                </div>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export default DevelopmentButton;
+</file>
+
+<file path="components/custom/NewCard.tsx">
+"use client";
+import { NewItem } from "@/lib/api";
+import Image from "next/image";
+
+export default function NewCard({ newItem }: { newItem: NewItem }) {
+    return (
+        <div className="w-80 aspect-square bg-neutral-900">
+            <div className="relative w-full h-60">
+                <Image
+                    src={newItem.image}
+                    alt={newItem.title}
+                    fill
+                    sizes="99vw"
+                    className="object-cover"
+                />
+            </div>
+            <div className="flex flex-col gap-1 mt-2 px-2">
+                <h3 className="text-xl text-neutral-400 line-clamp-1">
+                    {newItem.title}
+                </h3>
+                <p className="text-sm text-neutral-700 line-clamp-1">
+                    {newItem.date}
+                </p>
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/custom/ReadMoreMoveButton.tsx">
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
+interface ReadMoreButtonProps {
+    href: string;
+    text?: string;
+}
+
+export default function ReadMoreMoveButton({ href, text }: ReadMoreButtonProps) {
+    return (
+        <Link
+            href={href}
+            className="flex justify-center gap-1 items-center shadow-xl text-sm bg-netural-500 
+            backdrop-blur-md isolation-auto border-gray-50 relative font-light 
+            px-4 py-2 overflow-hidden border-1 rounded-full group bg-white text-black w-fit">
+            {text || "Read More"}
+            <div className="flex ml-2 w-5 h-5 justify-center items-center border-1 rounded-full 
+                border-neutral-800 bg-white group-hover:border-white transition-all duration-300">
+                <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-all duration-600" />
+            </div>
+            <div className="absolute top-0 left-0 bg-emerald-500 w-0 group-hover:w-full h-full transition-all duration-300 -z-10" />
+        </Link>
+    );
+}
+</file>
+
+<file path="components/custom/VideoBackground.tsx">
+import React from "react";
+
+export default function VideoBackground() {
+    return (
+        <div className="absolute h-full w-full inset-0 overflow-hidden">
+            <div className="h-full w-full overflow-hidden">
+                <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                className="relative z-1 w-full h-[calc(100%_+_72px)] object-cover
+                [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_100%)]">
+                <source src="/videos/background.webm" type="video/webm" />
+                    <source src="/videos/background.mp4" type="video/mp4" />
+                </video>
+            </div>
+            {/* <div className="absolute h-full w-full inset-0 bg-neutral-900/50 z-2" /> */}
+        </div>
+        
+    )
+}
+</file>
+
+<file path="components/development/DevelopmentDetailModal.tsx">
+"use client";
+
+import { DevelopmentItem, placeholderImage } from "@/lib/api";
+import { Zap, X } from 'lucide-react';
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+export default function DevelopmentDetailModal({ isOpen, onClose, project }: { isOpen: boolean, onClose: () => void, project: DevelopmentItem | null }) {
+    const [isVisible, setIsVisible] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const openTimer = useRef<NodeJS.Timeout | null>(null);
+    const closeTimer = useRef<NodeJS.Timeout | null>(null);
+
+    const handleClose = useCallback(() => {
+        setIsAnimating(false);
+        // 清除任何可能存在的关闭定时器，以防重复调用
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+        }
+        closeTimer.current = setTimeout(() => {
+            onClose();
+        }, 300);
+    }, [onClose]);
+
+    useEffect(() => {
+        // 步骤 2: 在 useEffect 开始时，清除所有旧的定时器
+        // 这是防止竞态条件的关键
+        if (openTimer.current) {
+            clearTimeout(openTimer.current);
+        }
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+        }
+
+        if (isOpen) {
+            setIsVisible(true);
+            openTimer.current = setTimeout(() => {
+                setIsAnimating(true);
+            }, 10);
+        } else {
+            // 当 isOpen 变为 false 时，我们直接开始退场动画
+            setIsAnimating(false);
+            closeTimer.current = setTimeout(() => {
+                setIsVisible(false);
+            }, 300);
+        }
+
+        // 步骤 3: 返回一个清理函数
+        // 这个函数会在组件卸载或 isOpen 变化导致 useEffect 重新运行时执行
+        return () => {
+            if (openTimer.current) {
+                clearTimeout(openTimer.current);
+            }
+            if (closeTimer.current) {
+                clearTimeout(closeTimer.current);
+            }
+        };
+    }, [isOpen]); // 依赖数组保持不变
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                handleClose();
+            }
+        };
+        if (isOpen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, handleClose]);
+
+    const handleBackdropClick = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            handleClose();
+        }
+    };
+
+    if (!isVisible || !project) {
+        return null;
+    }
+
+    return (
+        <div
+            className={`fixed inset-0 rounded-2xl z-30 bg-black/50 px-4 pt-20 pb-12 overflow-hidden transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
+            onClick={handleBackdropClick}
+            >
+            <div className="relative w-full mx-auto xl:w-1/2 h-full rounded-2xl bg-neutral-900/70 overflow-hidden">
+                <div className="absolute flex top-0.5 z-40 cursor-pointer right-0.5 items-center justify-center p-2 rounded-full hover:bg-black group/close">
+                    <button onClick={handleClose}>
+                        <X className="w-6 h-6 xl:w-8 xl:h-8 cursor-pointer text-white group-hover/close:rotate-90 transition-all duration-300" />
+                    </button>
+                </div>
+                <div className="relative w-full h-2/5 overflow-hidden">
+                    <Image
+                        src={project?.image || placeholderImage}
+                        alt={project?.title || placeholderImage}
+                        width={100}
+                        height={100}
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-0 left-0 w-full h-full bg-black/20" />
+                    <div className="absolute bottom-0 left-0 flex flex-col items-start justify-center p-4 gap-2">
+                        <div className="flex items-center justify-center h-full bg-black/50 rounded-md px-2 py-1">
+                            <Zap className="w-4 h-4 mr-2" />
+                            <span className="text-sm font-bold">
+                                Energy
+                            </span>
+                        </div>
+                        <h1 className="text-2xl font-bold text-white">{project?.title || ""}</h1>
+                        <p className="text-sm text-white line-clamp-3">{project?.description || ""}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+</file>
+
+<file path="components/GoogleAnalytic.tsx">
+// components/GoogleAnalytics.tsx
+'use client'; // 标记为客户端组件
+
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import Script from 'next/script';
+import { GA_TRACKING_ID, pageview } from '@/lib/gtag'; // 确保路径正确
+
+export default function GoogleAnalytics() {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        // 如果没有衡量ID，则不执行任何操作
+        if (!GA_TRACKING_ID) return;
+
+        // 拼接路径和查询参数
+        const url = pathname + searchParams.toString();
+        pageview(url);
+
+    }, [pathname, searchParams]);
+
+    return (
+        <>
+            <Script
+                strategy="afterInteractive"
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+                id="gtag-init"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+                }}
+            />
+        </>
+    );
+}
+</file>
+
+<file path="components/team/MemberCard.tsx">
+"use client";
+import Image from "next/image";
+import { TeamMemberItem } from "@/lib/api";
+
+export default function MemberCard({ member }: { member: TeamMemberItem }) {
+    return (
+        <div className="group relative cursor-pointer">
+            <div className="relative w-32 lg:w-40 xl:w-48 aspect-square rounded-full overflow-hidden mx-auto">
+                <Image src={member.image} alt={member.name} fill sizes="99vw" className="object-cover mx-auto" />
+            </div>
+            <div className="absolute invisble hover:visible w-full h-full top-0 left-0 bg-neutral-50 rounded-lg duration-500 opacity-0 group-hover:opacity-70 transition-all">
+                <div className="flex flex-col items-center justify-center h-full overflow-hidden p-4">
+                    <h3 className="text-2xl font-bold text-black">{member.name}</h3>
+                    <p className="text-sm text-black">{member.role}</p>
+                    <p className="text-sm text-black line-clamp-3">{member.description}</p>
+                </div>
+            </div>
+        </div>
+
+    );
+}
+</file>
+
+<file path="lib/gtag.ts">
+// lib/gtag.ts
+
+// 从环境变量中读取衡量ID
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+
+// 定义 pageview 函数，用于上报页面浏览
+export const pageview = (url: string) => {
+    // 确保GA_TRACKING_ID存在，并且gtag函数也存在于window对象上
+    if (!GA_TRACKING_ID || typeof window.gtag !== 'function') {
+        return;
+    }
+    window.gtag('config', GA_TRACKING_ID, {
+        page_path: url,
+    });
+};
+
+// 定义通用的事件上报函数
+type GtagEvent = {
+    action: string;
+    category: string;
+    label: string;
+    value?: number;
+};
+
+export const event = ({ action, category, label, value }: GtagEvent) => {
+    // 确保gtag函数存在于window对象上
+    if (typeof window.gtag !== 'function') {
+        return;
+    }
+    window.gtag('event', action, {
+        event_category: category,
+        event_label: label,
+        value: value,
+    });
+};
+</file>
+
+<file path="lib/utils.ts">
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</file>
+
+<file path="types/gtag.d.ts">
+// global.d.ts
+
+interface Gtag {
+    (command: 'config', targetId: string, params?: { [key: string]: unknown }): void;
+    (command: 'event', action: string, params?: { [key: string]: unknown }): void;
+    (command: 'js', config: Date): void;
+}
+
+interface Window {
+    gtag: Gtag;
+}
+</file>
+
+<file path="app/publications/page.tsx">
+import { Metadata } from 'next';
+import { getPublicationsData } from "@/lib/api";
+import PublicationFrame from '@/components/publication/PublicationFrame';
+
+export const metadata: Metadata = {
+    title: 'All Publications | CRIBE Lab',
+    description: 'Explore all of CRIBE Lab\'s publications',
+}
+
+export const dynamic = "force-dynamic";
+
+export default async function PublicationsPage() {
+    const [publicationsData] = await Promise.all([getPublicationsData()]);
+    return (
+        <main className="flex min-h-screen bg-black pt-16">
+            <PublicationFrame publications={publicationsData} />
+        </main>
+    );
+}
+</file>
+
+<file path="app/research/[id]/detail/page.tsx">
+import { getResearchData } from "@/lib/api";
+import Image from "next/image";
+
+export default async function ResearchDetailSubPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const all = await getResearchData();
+    const detail = all.find(item => String(item.id) === id);
+
+    if (!detail) return <div className="text-white p-8">Not found</div>;
+
+    return (
+        <div className="min-h-screen bg-black flex flex-col items-center pt-24 pb-24">
+            <div className="w-full max-w-[1400px]">
+                {/* 上方：标题和图片 */}
+                <div className="flex flex-row-reverse items-start bg-black rounded-xl shadow-lg px-10 pt-16 pb-8 gap-16">
+                    {/* 右侧图片 */}
+                    <div className="relative flex-shrink-0 w-[500px] aspect-[4/3] rounded-xl overflow-hidden flex items-center justify-center">
+                        <Image
+                            src={detail.image}
+                            alt={detail.title}
+                            fill
+                            sizes="99vw"
+                            className="object-cover"
+                        />
+                    </div>
+                    {/* 左侧标题和时间 */}
+                    <div className="flex-1 h-[375px] flex flex-col justify-between">
+                        <h1 className="text-5xl font-bold text-white leading-tight">{detail.title}</h1>
+                        <span className="text-neutral-500 text-lg">
+                            Jul X, 2025
+                        </span>
+                    </div>
+                </div>
+                {/* 下方：正文描述 */}
+                <div className="mt-10 px-10">
+                    <div className="text-white text-2xl font-bold mb-6" style={{ textAlign: "left" }}>
+                        ABSTRACT
+                    </div>
+                    <div className="text-neutral-300 text-xl">{detail.description}</div>
+                </div>
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/custom/Citation.tsx">
+const Citation = ({ content }: { content: string }) => {
+  return (
+    <p className="text-gray-300 text-center w-full px-10 mx-auto mb-12 text-sm sm:text-base">
+      {content}
+    </p>
+  );
+};
+
+export default Citation;
+</file>
+
+<file path="components/custom/FeaturedMemberCard.tsx">
+"use client";
+import Image from "next/image";
+import { TeamMemberItem } from "@/lib/api";
+
+export default function FeaturedMemberCard({
+  member,
+}: {
+  member: TeamMemberItem;
+}) {
+  return (
+    <div className="grid grid-cols-3 grid-rows-4 col-span-3 row-span-4 gap-4">
+      <div className="flex flex-col col-span-3 row-span-1 gap-1">
+        <span className="text-white text-md font-normal">
+          Mainly major in Parametric green building design research.
+        </span>
+        <span className="text-white text-md font-light">
+          · Building performance and thermal comfort
+        </span>
+        <span className="text-white text-md font-light">
+          · Climate Change and Urban Climate adaptability
+        </span>
+        <span className="text-white text-md font-light">
+          · Artificial intelligence and machine learning
+        </span>
+      </div>
+      <div className="col-span-3 row-span-3 w-full h-[368px] relative rounded-lg bg-[rgba(95,99,109,0.4)] overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <div className="overflow-hidden w-full h-full">
+          <div className="relative w-full h-full -bottom-10 -right-5">
+            {member.image && (
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                className="object-contain object-right-top"
+                loading="lazy"
+              />
+            )}
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 mt-28 ml-10 flex items-center justify-center h-fit">
+          <h3 className="text-2xl font-bold text-white">{member.name}</h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="components/custom/NavigationButton.tsx">
+"use client";
+import { Search, Menu, X, Earth } from "lucide-react";
+
+export default function NavigationButton({
+  isMenuOpen,
+  toggleMenu,
+}: {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+}) {
+  return (
+    <div className="flex items-center space-x-3">
+      <button className="text-white hover:text-gray-300 transition-colors">
+        <Search size={20} />
+      </button>
+      <button className="text-white hover:text-gray-300 transition-colors">
+        <Earth size={20} />
+      </button>
+      <button
+        className="lg:hidden text-white hover:text-gray-300 transition-colors"
+        onClick={toggleMenu}
+      >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+  );
+}
+</file>
+
+<file path="components/custom/SubTitle.tsx">
+const SubTitle = ({ content }: { content: string }) => {
+  return (
+    <h2 className="text-3xl font-bold text-white text-center mb-10">
+      {content}
+    </h2>
+  );
+};
+
+export default SubTitle;
+</file>
+
+<file path="components/development/DevelopmentGridCard.tsx">
+"use client"
+
+import { useState } from "react";
+import { DevelopmentItem } from "@/lib/api";
+import { ExternalLink, Zap } from 'lucide-react';
+import DevelopmentDetailModal from "./DevelopmentDetailModal";
+import Link from "next/link";
+import Image from "next/image";
+
+
+export default function DevelopmentGrid({ developmentData }: { developmentData: DevelopmentItem[] }) {
+    const [selectedProject, setSelectedProject] = useState<DevelopmentItem | null>(null);
+
+    const handleOpenModal = (project: DevelopmentItem) => {
+        setSelectedProject(project);
+    }
+
+    const handleCloseModal = () => {
+        setSelectedProject(null);
+    }
+
+    return (
+        <section className="w-full h-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-8 p-8">
+            {developmentData.map((item) => (
+                <div 
+                key={item.id}
+                onClick={() => handleOpenModal(item)}
+                onKeyDown={(e) => e.key === "Enter" && handleOpenModal(item)}
+                role="button"
+                tabIndex={0}
+                className="relative bg-gray-900 rounded-lg w-full cursor-pointer border-[1px] border-gray-600 overflow-hidden group
+                hover:-translate-y-2 hover:shadow-purple-500/20 hover:shadow-2xl transition-all duration-300">
+                    <div className="relative top-0 left-0 w-full h-48 overflow-hidden">
+                        <Image src={item.image} alt={item.title} fill sizes="99vw" className="object-cover transition-all opacity-90 duration-300 group-hover:scale-105 group-hover:opacity-100" />
+                        <div className="absolute bg-neutral-900 left-3 bottom-2 w-fit py-2 px-4 opacity-90 border-[1px] border-gray-600 rounded-md z-10">
+                            <div className="flex items-center justify-center h-full">
+                                <Zap className="w-4 h-4 mr-2" />
+                                <span className="text-sm font-bold">
+                                    Energy
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-white p-6 flex flex-col">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-lg font-bold line-clamp-2">{item.title}</h2>
+                            <Link href={item.url ?? ""}>
+                                <div className="w-8 h-8 hover:bg-neutral-400 rounded-md flex items-center justify-center transition-all duration-300 group/external">
+                                    <ExternalLink className="w-4 h-4 opacity-50 group-hover/external:opacity-100" />
+                                </div>
+                            </Link>
+                        </div>
+                        <p className="text-sm text-gray-500 line-clamp-6 mt-2">
+                            {item.description}
+                        </p>
+                        <div className="flex items-center justify-end mt-4">
+                            <div className="text-black font-bold p-2 bg-white rounded-md hover:scale-105 transition-all duration-300">
+                                View Details
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+            <DevelopmentDetailModal 
+                isOpen={!!selectedProject}
+                onClose={handleCloseModal}
+                project={selectedProject}
+            />
+        </section>
+    )
+}
+</file>
+
+<file path="components/publication/YearSelector.tsx">
+"use client";
+
+export default function YearSelector({ 
+    years, 
+    selectedYear, 
+    onYearChange 
+}: { 
+    years: string[]; 
+    selectedYear: string;
+    onYearChange: (year: string) => void;
+}) {
+    return (
+        <div className="flex justify-between items-center gap-4 px-4 py-4">
+            <h1 className="text-white text-2xl font-bold">All Publications</h1>
+            <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-14 gap-x-1 gap-y-1 bg-neutral-800 rounded-sm">
+                {years.map((year) => (
+                    <button
+                        key={year}
+                        onClick={() => onYearChange(year)}
+                        className={`px-2 py-1 rounded-sm text-sm ${
+                            selectedYear === year 
+                                ? "text-white bg-neutral-600" 
+                                : "text-gray-400"
+                        } cursor-pointer hover:bg-neutral-600 transition-colors duration-300`}
+                    >
+                        {year}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/ui/scroll-area.tsx">
+"use client";
+
+import * as React from "react";
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+
+import { cn } from "@/lib/utils";
+
+function ScrollArea({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+  return (
+    <ScrollAreaPrimitive.Root
+      data-slot="scroll-area"
+      className={cn("relative", className)}
+      {...props}
+    >
+      <ScrollAreaPrimitive.Viewport
+        data-slot="scroll-area-viewport"
+        className="focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1"
+      >
+        {children}
+      </ScrollAreaPrimitive.Viewport>
+      <ScrollBar />
+      <ScrollAreaPrimitive.Corner />
+    </ScrollAreaPrimitive.Root>
+  );
+}
+
+function ScrollBar({
+  className,
+  orientation = "vertical",
+  ...props
+}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
+  return (
+    <ScrollAreaPrimitive.ScrollAreaScrollbar
+      data-slot="scroll-area-scrollbar"
+      orientation={orientation}
+      className={cn(
+        "flex touch-none p-px transition-colors select-none",
+        orientation === "vertical" &&
+          "h-full w-2.5 border-l border-l-transparent",
+        orientation === "horizontal" &&
+          "h-2.5 flex-col border-t border-t-transparent",
+        className,
+      )}
+      {...props}
+    >
+      <ScrollAreaPrimitive.ScrollAreaThumb
+        data-slot="scroll-area-thumb"
+        className="bg-border relative flex-1 rounded-full"
+      />
+    </ScrollAreaPrimitive.ScrollAreaScrollbar>
+  );
+}
+
+export { ScrollArea, ScrollBar };
+</file>
+
+<file path="app/globals.css">
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.amap-logo {
+  display: none !important;
+}
+.amap-copyright {
+  display: none !important;
+}
+</file>
+
+<file path="components/custom/DevelopmentSwiper.tsx">
+'use client'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import DevelopmentCard from './DevelopmentCard';
+import { DevelopmentItem } from '@/lib/api';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+
+interface DevelopmentSliderProps {
+    developmentItems: DevelopmentItem[];
+}
+
+const DevelopmentSwiper = ({ developmentItems }: DevelopmentSliderProps) => {
+    return (
+        <div className="relative mx-auto group/swiper">
+            <Swiper
+                modules={[Navigation]}
+                spaceBetween={20}
+                slidesPerView={"auto"}
+                grabCursor={true}
+                loop={true}
+                navigation={{
+                    nextEl: '.research-swiper-button-next',
+                    prevEl: '.research-swiper-button-prev',
+                }}
+                className="!pb-4"
+            >
+                {developmentItems.map((item) => (
+                    <SwiperSlide key={item.id} className="!w-auto h-auto">
+                        <DevelopmentCard item={item} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            <div className="research-swiper-button-prev absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform -translate-x-20 
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:-translate-x-10">
+                <ChevronLeft className="w-8 h-8" />
+            </div>
+
+            <div className="research-swiper-button-next absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform translate-x-20
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:translate-x-10">
+                <ChevronRight className="w-8 h-8" />
+            </div>
+        </div>
+    );
+};
+
+export default DevelopmentSwiper;
+</file>
+
+<file path="components/custom/Logo.tsx">
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+
+const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+
+export default function Logo() {
+  return (
+    <div className="flex items-center">
+      <Link href="/" className="flex items-center">
+        <Image
+          src={`${apiUrl}/wp-content/uploads/2025/04/LOGO.svg`}
+          alt="CRIBE Lab Logo"
+          width={32}
+          height={32}
+          className="h-8 w-8"
+        />
+
+        <span className="ml-2 text-xl font-roboto text-white font-bold">
+          CRIBE Lab
+        </span>
+      </Link>
+    </div>
+  );
+}
+</file>
+
+<file path="components/custom/ReadMoreButton.tsx">
+"use client";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+interface ReadMoreButtonProps {
+    href: string;
+    text?: string;
+}
+
+export default function ReadMoreButton({ href, text }: ReadMoreButtonProps) {
+    return (
+        <Link
+            href={href}
+            className="relative inline-flex items-center cursor-pointer outline-none border-0 bg-transparent p-0 font-inherit text-inherit w-48 group"
+        >
+            <span className="relative flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full transition-all duration-300 ease-in-out group-hover:w-full">
+                <div className="absolute left-0 group-hover:left-2 flex items-center justify-center w-12 h-12 transition-all duration-300 ease-in-out">
+                    <ArrowRight className="w-5 h-5" />
+                </div>
+            </span>
+            <span className="absolute left-16 text-[#282936] font-bold leading-normal text-center uppercase transition-all duration-800 ease-in-out group-hover:text-white">
+                {text || "Read More"}
+            </span>
+        </Link>
+    );
+}
+</file>
+
+<file path="components/publication/PublicationFrame.tsx">
+"use client";
+
+import { useState } from "react";
+import YearSelector from "./YearSelector";
+import { PublicationItem } from "@/lib/api";
+import PublicationDetailCard from "./PublicationDetailCard";
+
+export default function PublicationFrame({ 
+    publications 
+}: { 
+    publications: PublicationItem[];
+}) {
+    const [selectedYear, setSelectedYear] = useState("All");
+    
+    const uniqueYears = [...new Set(publications.map((pub) => pub.year))].sort(
+        (a, b) => parseInt(b) - parseInt(a),
+    );
+    const years = ["All", ...uniqueYears];
+    
+    // 根据选择的年份过滤出版物
+    const filteredPublications =
+        selectedYear === "All"
+            ? publications.sort((a, b) => parseInt(b.year) - parseInt(a.year))
+            : publications.filter((pub) => pub.year === selectedYear);
+
+    return (
+        <section className="w-full py-12 bg-black">
+            <div className="flex flex-col font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 items-center">
+                <YearSelector 
+                    years={years}
+                    selectedYear={selectedYear}
+                    onYearChange={setSelectedYear}
+                />
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-4 w-fit">
+                    {filteredPublications.map((publication) => (
+                        <PublicationDetailCard key={publication.id} publication={publication} />
+                    ))}
+                </div>
+                
+                {/* 这里可以添加展示 filteredPublications 的组件 */}
+                <div className="mt-8">
+                    {/* 示例：展示过滤后的出版物数量 */}
+                    <p className="text-white">
+                        {selectedYear === "All" 
+                            ? `Show all  ${filteredPublications.length} publications`
+                            : `Show ${filteredPublications.length} publications for ${selectedYear} year`
+                        }
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
+}
+</file>
+
+<file path="app/research/[id]/page.tsx">
+// TODO: Research 卡片应该能点击跳转
+
+import { getResearchData } from "@/lib/api";
+import ReadMoreButton from "@/components/custom/ReadMoreButton";
+import Image from "next/image";
+
+export default async function ResearchDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const all = await getResearchData();
+    const detail = all.find(item => String(item.id) === id);
+
+    if (!detail) return <div className="text-white p-8">Not found</div>;
+
+    return (
+        <div className="min-h-screen bg-black flex flex-col items-center pt-32 pb-24">
+            {/* 详情页标题 */}
+            <h2 className="text-4xl font-bold text-white mb-10">
+                RESEARCH - {detail.title}
+            </h2>
+            <div className="bg-black border border-neutral-600 rounded-xl shadow-lg px-10 py-8 w-full max-w-[1300px] flex flex-row items-start gap-10">
+                {/* 左侧图片，横向比例，图片可裁剪填满 */}
+                <div className="relative flex-shrink-0 w-[400px] aspect-[4/3] rounded-xl overflow-hidden">
+                    <Image
+                        src={detail.image}
+                        alt={detail.title}
+                        fill
+                        sizes="99vw"
+                        className="object-cover"
+                    />
+                </div>
+                {/* 右侧内容 */}
+                <div className="flex flex-col justify-center flex-1">
+                    <h1 className="text-2xl font-bold text-white mb-4">{detail.title}</h1>
+                    <div className="text-neutral-300 text-base">{detail.description}</div>
+                    {/* Read More 按钮 */}
+                    <div className="flex justify-end mt-8">
+                        <ReadMoreButton href={`/research/${detail.id}/detail`} text="Read More" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/custom/DevelopmentCard.tsx">
+"use client"
+import Image from "next/image";
+import { DevelopmentItem } from "@/lib/api";
+import Link from "next/link";
+
+export default function DevelopmentCard({ item }: { item: DevelopmentItem }) {
+
+    return (
+        <div className="flex flex-col w-80 h-96 mx-auto p-2">
+            <Link href={item.url || ""}>
+            <div className="relative w-full h-56 mx-auto rounded-lg overflow-hidden mb-6">
+                <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover w-full h-full"
+                    sizes="99vw"
+                />
+            </div>
+            <div>
+                <h3 className='text-2xl font-bold line-clamp-1'>
+                    {item.title}
+                </h3>
+                <p className="text-sm text-neutral-200 line-clamp-2 mt-4">
+                    {item.description}
+                </p>
+            </div>
+            </Link>
+            {/* <div className="flex justify-start items-center mt-6 group/button">
+                <Link
+                    href={item.url || ""}
+                    className="inline-flex items-center justify-center mt-3 px-6 py-3 border 
+                        border-white text-sm font-medium rounded-full text-white 
+                        hover:bg-white hover:text-black transition-colors duration-200"
+                >
+                    LEARN MORE
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
+                </Link>
+            </div> */}
+        </div>
+    )
+}
+</file>
+
+<file path="components/custom/Navigation.tsx">
+"use client";
+
+import { Link as ScrollLink } from "react-scroll";
+import { MeanItem } from "@/lib/api";
+import { usePathname } from "next/navigation";
+import NextLink from "next/link";
+
+export default function Navigation({ meanItems }: { meanItems: MeanItem[] }) {
+    const pathname = usePathname();
+    const isHomePage = pathname === "/";
+    return (
+        <nav className="hidden lg:flex space-x-8">
+            {meanItems.map((item: MeanItem) => {
+                if (isHomePage) {
+                    if (item.sub_href.startsWith('/') && item.sub_href.includes('#')) {
+                        return (
+                            <ScrollLink
+                                key={item.id}
+                                to={item.href}
+                                spy={true}
+                                smooth={true}
+                                offset={-10}
+                                duration={500}
+                                className="text-white hover:text-gray-300 px-2 py-1 transition-colors font-roboto font-medium cursor-pointer"
+                            >
+                                {item.label}
+                            </ScrollLink>
+                        );
+                    } else {
+                        return (
+                            <NextLink
+                                key={item.id}
+                                href={item.sub_href}
+                                className="text-white hover:text-gray-300 px-2 py-1 transition-colors font-roboto font-medium cursor-pointer"
+                            >
+                                {item.label}
+                            </NextLink>
+                        );
+                    }
+                } else {
+                    return (
+                        <NextLink
+                            key={item.id}
+                            href={item.sub_href}
+                            className="text-white hover:text-gray-300 px-2 py-1 transition-colors font-roboto font-medium cursor-pointer"
+                        >
+                            {item.label}
+                        </NextLink>
+                    );
+                }
+            })}
+        </nav>
+    );
+}
+</file>
+
+<file path="components/custom/ResearchSwiper.tsx">
+'use client'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import ResearchCard from './ResearchCard';
+import { ResearchItem } from '@/lib/api';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+
+interface ResearchSliderProps {
+    researchAreas: ResearchItem[];
+}
+
+const ResearchSwiper = ({ researchAreas }: ResearchSliderProps) => {
+    return (
+        <div className="relative mx-auto group/swiper">
+            <Swiper
+                modules={[Navigation]}
+                spaceBetween={20}
+                slidesPerView={"auto"}
+                freeMode={true}
+                loop={true}
+                grabCursor={true}
+                navigation={{
+                    nextEl: '.research-swiper-button-next',
+                    prevEl: '.research-swiper-button-prev',
+                }}
+                className="!pb-12"
+            >
+                {researchAreas.map((area) => (
+                    <SwiperSlide key={area.id} className="!w-auto h-auto">
+                        <ResearchCard area={area} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            <div className="research-swiper-button-prev absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform -translate-x-20
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:-translate-x-10">
+                <ChevronLeft className="w-8 h-8" />
+            </div>
+
+            <div className="research-swiper-button-next absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer p-2 bg-black bg-opacity-50 rounded-full
+                     text-white hover:bg-opacity-75 transition-all duration-300 transform translate-x-20
+                     opacity-0 group-hover/swiper:opacity-100 group-hover/swiper:translate-x-10">
+                <ChevronRight className="w-8 h-8" />
+            </div>
+        </div>
+    );
+};
+
+export default ResearchSwiper;
+</file>
+
+<file path="components/custom/SelectedPublicationFrame.tsx">
+"use client";
+
+import { SelectedCard } from './SelectedCard';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { PublicationItem } from '@/lib/api';
+
+
+const SelectedPublicationFrame = ({ selectedPublications }: { selectedPublications: PublicationItem[] }) => {
+    return (
+        <div className="bg-[rgba(217,217,217,0.1)] p-4 rounded-xl">
+        <h3 className="text-xl font-semibold text-white mb-6 text-center">
+            Selected Publications
+        </h3>
+        <ScrollArea className="h-96 md:h-128 w-full pr-4">
+            <div className="space-y-6 p-4">
+                {selectedPublications.length > 0 ? (
+                    selectedPublications.map((pub) => (
+                        <SelectedCard key={pub.id} publication={pub} />
+                    ))
+                ) : (
+                    <p className="text-gray-400 text-sm text-center py-10">
+                        No selected publications found. Mark publications as Selected in WordPress.
+                    </p>
+                )}
+            </div>
+        </ScrollArea>
+    </div>
+  );
+};
+
+export default SelectedPublicationFrame;
+</file>
+
+<file path="components/custom/VerticalMenu.tsx">
+"use client";
+import { MeanItem } from "@/lib/api";
+import { Link as ScrollLink } from "react-scroll";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+
+export default function VerticalMenu({
+    meanItems,
+    toggleMenu,
+    isMenuOpen,
+}: {
+    meanItems: MeanItem[];
+    toggleMenu: () => void;
+    isMenuOpen: boolean;
+}) {
+    const pathname = usePathname();
+    const isHomePage = pathname === "/";
+    return (
+        <div className="lg:hidden bg-black">
+            <div
+                className={`transition-all duration-500 ease-out overflow-hidden ${isMenuOpen ? "max-h-screen" : "max-h-0"}`}
+            >
+                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    {meanItems.map((item: MeanItem) => {
+                        if (isHomePage) {
+                            if (item.sub_href.startsWith('/') && item.sub_href.includes('#')) {
+                                return (
+                                    <ScrollLink
+                                        key={item.id}
+                                        to={item.href}
+                                        spy={true}
+                                        smooth={true}
+                                        offset={-10}
+                                        duration={500}
+                                        onClick={toggleMenu}
+                                        className="block px-3 py-2 text-white hover:bg-gray-800 rounded-md font-roboto font-medium cursor-pointer"
+                                    >
+                                        {item.label}
+                                    </ScrollLink>
+                                );
+                            } else {
+                                return (
+                                    <NextLink
+                                        key={item.id}
+                                        href={item.sub_href}
+                                        onClick={toggleMenu}
+                                        className="block px-3 py-2 text-white hover:bg-gray-800 rounded-md font-roboto font-medium cursor-pointer"
+                                    >
+                                        {item.label}
+                                    </NextLink>
+                                );
+                            }
+                        } else {
+                            return (
+                                <NextLink
+                                    key={item.id}
+                                    href={item.sub_href}
+                                    onClick={toggleMenu}
+                                    className="block px-3 py-2 text-white hover:bg-gray-800 rounded-md font-roboto font-medium cursor-pointer"
+                                >
+                                    {item.label}
+                                </NextLink>
+                            );
+                        }
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/Header.tsx">
+"use client";
+
+import { useState, useEffect } from "react";
+import Logo from "@/components/custom/Logo";
+import VerticalMenu from "@/components/custom/VerticalMenu";
+import { getMeanData, MeanItem } from "@/lib/api";
+import Navigation from "@/components/custom/Navigation";
+import NavigationButton from "@/components/custom/NavigationButton";
+
+export default function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [meanItems, setMeanItems] = useState<MeanItem[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getMeanData();
+                setMeanItems(data);
+            } catch (error) {
+                console.error("Failed to fetch mean data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    return (
+        <header className="fixed top-0 left-0 right-0 z-50 w-full bg-black bg-opacity-80 backdrop-blur-sm border-b border-gray-800">
+            <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    <Logo />
+                    <Navigation meanItems={meanItems} />
+                    <NavigationButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+                </div>
+            </div>
+            {isMenuOpen && (
+                <VerticalMenu
+                    meanItems={meanItems}
+                    toggleMenu={toggleMenu}
+                    isMenuOpen={isMenuOpen}
+                />
+            )}
+        </header>
+    );
+}
+</file>
+
+<file path="components/custom/MapComponent.tsx">
+'use client'
+import { useMemo, useRef} from 'react';
+import { Map, APILoader, type MapProps } from '@uiw/react-amap';
+import { Home } from 'lucide-react'; // 可选：使用图标
+
+const API_KEY = process.env.NEXT_PUBLIC_AMAP_KEY;
+
+// 将常量移到组件外部，避免依赖问题
+const INITIAL_CENTER: [number, number] = [113.970741, 22.590652];
+const INITIAL_ZOOM = 18;
+
+// The defaultType prop is not included in the official MapProps, so we extend it.
+interface CustomMapProps extends MapProps {
+    zoom?: number;
+    center?: [number, number];
+    lang?: 'zh_cn' | 'en' | 'zh_en';
+    defaultType?: number;
+}
+
+// 可选：更严格的类型定义
+interface AmapRef {
+  map: {
+    setCenter: (center: [number, number]) => void;
+    setZoom: (zoom: number) => void;
+    panTo: (center: [number, number]) => void;
+  };
+}
+
+export default function MapComponent() {
+    // 修复类型定义：使用正确的 ref 类型
+    const mapRef = useRef<AmapRef | null>(null);
+    
+    // 修复 useMemo 依赖问题：由于常量已移到组件外部，不再需要依赖数组
+    const mapOptions: CustomMapProps = useMemo(() => ({
+        zoom: INITIAL_ZOOM,
+        center: INITIAL_CENTER,
+        lang: "en",
+        defaultType: 1,
+    }), []); // 现在可以安全使用空依赖数组
+
+    // 重置到初始位置的函数
+    const resetToInitialPosition = () => {
+        if (mapRef.current && mapRef.current.map) {
+            const map = mapRef.current.map;
+            
+            // 方法1: 使用高德地图原生 API 方法
+            map.setCenter(INITIAL_CENTER);
+            map.setZoom(INITIAL_ZOOM);
+            
+            // 方法2: 如果你想要平滑过渡效果，可以使用：
+            // map.panTo(INITIAL_CENTER);
+            // map.setZoom(INITIAL_ZOOM);
+        }
+    };
+
+    // 条件检查移到 Hooks 调用之后
+    if (!API_KEY) {
+        return <div>Error: Amap Key Not Configured (NEXT_PUBLIC_AMAP_KEY)</div>;
+    }
+
+    return (
+        <div className="relative w-full h-full flex flex-col justify-start">
+            <APILoader akey={API_KEY} version="2.0">
+                <Map 
+                    {...mapOptions} 
+                    ref={mapRef}
+                />
+            </APILoader>
+            
+            {/* 重置按钮 */}
+            <button
+                onClick={resetToInitialPosition}
+                className="absolute top-4 right-4 z-10 
+                           bg-white hover:bg-gray-100 text-gray-800 
+                           px-3 py-2 rounded-md shadow-md border border-gray-300
+                           flex items-center gap-2 text-sm font-medium
+                           transition-colors duration-200"
+                title="Reset to initial position"
+            >
+                <Home size={16} />
+            </button>
+            
+            <p className='text-sm text-white bg-neutral-400'>
+                Room 309, Building H, Tsinghua Campus Shenzhen University Town, Shenzhen
+            </p>
+        </div>
+    );
+}
+</file>
+
+<file path="components/DevelopmentSection.tsx">
+// TODO: Discover more our Development 部分未完成
+
+import Citation from "./custom/Citation";
+import SubTitle from "./custom/SubTitle";
+import DevelopmentSwiper from "./custom/DevelopmentSwiper";
+import DevelopmentButton from "./custom/DevelopmentButton";
+import { getDevelopmentData } from "@/lib/api";
+
+
+export default async function DevelopmentSection() {
+    const developmentData = await getDevelopmentData();
+    const subtitle = "DEVELOPMENT";
+    const citation = "Building the tools for future discoveries"
+    return (
+        <section id="development" className="w-full py-20 bg-black overflow-x-hidden">
+            <div className="relative font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+                <SubTitle content={subtitle} />
+                <Citation content={citation} />
+                <DevelopmentSwiper developmentItems={developmentData} />
+                <DevelopmentButton href="/development" content="Discover more" className="mt-3" />
+            </div>
+        </section>
+    )
+}
+</file>
+
+<file path="components/NewsSection.tsx">
+import { getNewsData } from "@/lib/api";
+import NewCard from "@/components/custom/NewCard";
+import Subtitle from "@/components/custom/SubTitle";
+
+const  NewsSection = async () => {
+    const newsItems = await getNewsData();
+    return (
+        <section id="news" className="w-full py-20 bg-black">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Subtitle content="NEWS" />
+                <div>
+                    {newsItems.map((news) => (
+                        <NewCard key={news.id} newItem={news} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+
+export default NewsSection;
+</file>
+
+<file path="components/PublicationsSection.tsx">
+"use client";
+
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import SubTitle from "@/components/custom/SubTitle";
+import type { PublicationItem } from "@/lib/api";
+import SelectedPublicationFrame from "@/components/custom/SelectedPublicationFrame";
+import AllPublicationFrame from "@/components/custom/AllPublicationFrame";
+
+interface PublicationsSectionProps {
+    publications: PublicationItem[];
+}
+
+const PublicationsSection = ({ publications }: PublicationsSectionProps) => {
+    const subtitle = "PUBLICATIONS";
+    const selectedPublications = publications
+        .filter((pub) => pub.is_selected)
+        .slice(0, 5);
+    return (
+        <section id="publications" className="w-full py-20 bg-black">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <SubTitle content={subtitle} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Selected Publications */}
+                    <SelectedPublicationFrame
+                        selectedPublications={selectedPublications}
+                    />
+
+                    {/* All Publications with Year Filter */}
+                    <AllPublicationFrame publications={publications} />
+                </div>
+
+                <div className="text-center mt-12">
+                    <Link
+                        href="/publications"
+                        className="inline-flex items-center justify-center px-6 py-3 border border-white text-sm font-medium rounded-sm text-white hover:bg-white hover:text-black transition-colors duration-200"
+                    >
+                        READ MORE <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default PublicationsSection;
+</file>
+
+<file path="components/HeroSection.tsx">
+import VideoBackground from "./custom/VideoBackground";
+
+const HeroSection = () => {
+    return (
+        <section
+            id="home"
+            className="relative w-full h-screen flex flex-col items-center bg-black justify-center pt-16"
+        >
+            <VideoBackground />
+            <div className="relative w-full h-full mx-auto">
+                
+                <div className="relative z-20 flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
+                    <h1 className="text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 lg:px-8 font-roboto font-extrabold text-white leading-tight tracking-wide">
+                        Creating smart-driven climate-resilient buildings and cities
+                    </h1>
+                    <p className="hidden lg:block w-full text-2xl text-center p-2">
+                        Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab)
+                    </p>
+                </div>
+            </div>
+            <div className="relative z-20 w-full flex items-center flex-col lg:flex-row p-4 lg:p-20 gap-4 lg:gap-0">
+                <div className="w-full text-center lg:w-2/5">
+                    <h2 className="text-xl lg:text-4xl font-bold">
+                        OUR MISSION
+                    </h2>
+                </div>
+                <div className="w-full line-clamp-5 lg:line-clamp-none text-sm lg:text-md text-center lg:text-left leading-relaxed">
+                    <p>
+                        Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab) looks for systematic approach that makes buildings and cities adapt responsively to changing climate conditions by incorporating smart technologies and design strategies that optimize energy usage, enhance comfort, and minimize environmental impact. The end of our research is to create human-made and human-centered surroundings that respond dynamically to changing weather and climate patterns while utilizing intelligent systems to manage energy consumption and physical environment effectively in buildings and cities.
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default HeroSection;
+</file>
+
+<file path="components/TeamSection.tsx">
+import { getTeamMembersData, TeamMemberItem } from "@/lib/api";
+import ReadMoreMoveButton from "@/components/custom/ReadMoreMoveButton";
+import Image from "next/image";
+
+export default async function TeamSection() {
+    // Get featured team members (first one is the primary)
+    const subtitle = "OUR TEAM";
+    const teamMembersData: TeamMemberItem[] = await getTeamMembersData();
+    const otherMembers = teamMembersData.filter((member) => !member.is_featured);
+    const team = otherMembers.filter((member) => member.is_team);
+
+    return (
+        <section id="team" className="w-full py-20 bg-black">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-10 flex-col md:flex-row">
+                <div className="relative w-full md:w-1/2 h-54 md:h-96">
+                    <Image src={team[0]?.image} alt={team[0]?.name} fill sizes="99vw" className="object-cover rounded-lg" />
+                    <div className="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                        <h3 className="text-2xl text-center font-bold text-neutral-200">
+                            The gravity of ideas is bringing us together.
+                        </h3>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2 flex flex-col justify-between py-5">
+                    <div className="mb-12">
+                        <h2 className="text-3xl font-bold text-white text-start mb-5">
+                            {subtitle}
+                        </h2>
+                        <p className="text-gray-300 text-start w-full text-sm sm:text-base">
+                            {team[0]?.description}
+                        </p>
+                    </div>
+                    <ReadMoreMoveButton href={'/team'} text="Know About Us" />
+                </div>
+            </div>
+        </section>
+    );
+}
+</file>
+
+<file path="components/custom/AllPublicationFrame.tsx">
+"use client";
+
+import { useState } from "react";
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { PublicationItem } from "@/lib/api";
+
+export default function AllPublicationFrame({ publications,}: { publications: PublicationItem[];}) {
+    const [selectedYear, setSelectedYear] = useState("all");
+    const years = [...new Set(publications.map((pub) => pub.year))].sort(
+        (a, b) => parseInt(b) - parseInt(a),
+    );
+
+    const filteredPublications =
+        selectedYear === "all"
+            ? publications.sort((a, b) => parseInt(b.year) - parseInt(a.year))
+            : publications.filter((pub) => pub.year === selectedYear);
+
+    return (
+        <div>
+            <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl w-fit font-semibold text-white">
+                    All Publications
+                </h3>
+                <div className="grid grid-cols-4 md:grid-cols-9 gap-x-2 gap-y-1">
+                    <button
+                        onClick={() => setSelectedYear("all")}
+                        className={`px-2 py-1 rounded-md text-sm ${selectedYear === "all" ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}
+                    >
+                        ALL
+                    </button>
+                    {years.map((year) => (
+                        <button
+                            key={year}
+                            onClick={() => setSelectedYear(year)}
+                            className={`px-1 py-1 rounded-md text-sm ${selectedYear === year ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}
+                        >
+                            {year}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="space-y-6">
+                <ScrollArea className="h-96 md:h-128 w-full pr-4">
+                    {filteredPublications.map((pub) => (
+                        pub.url ? (
+                            <a
+                                key={pub.id}
+                                href={pub.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block py-4 border-b border-gray-800 group"
+                            >
+                                <p className="text-sm text-gray-300 mb-1 group-hover:text-white transition-colors duration-200">{pub.title}</p>
+                                <p className="text-xs text-gray-500">
+                                    {pub.authors} ({pub.year})
+                                </p>
+                            </a>
+                        ) : (
+                            <div
+                                key={pub.id}
+                                className="py-4 border-b border-gray-800"
+                            >
+                                <p className="text-sm text-gray-300 mb-1">{pub.title}</p>
+                                <p className="text-xs text-gray-500">
+                                    {pub.authors} ({pub.year})
+                                </p>
+                            </div>
+                        )
+                    ))}
+                </ScrollArea>
+            </div>
+        </div>
+    )
+}
+</file>
+
+<file path="components/JoinSection.tsx">
+'use client'
+
+import { GraduationCap } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+
+const DynamicMap = dynamic(
+    () => import('./custom/MapComponent'),
+    {
+        ssr: false,
+        loading: () => <p>Loading...</p>
+    }
+)
+
+const JoinSection = () => {
+    return (
+        <section id="join" className="w-full py-14 bg-neutral-900">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-10 flex-col md:flex-row">
+                <div className="w-full md:w-1/2 flex flex-col justify-start py-5 gap-4">
+                    <h2 className="text-3xl font-extrabold text-white text-start ">
+                        Join Our Lab
+                    </h2>
+                    <p className="text-gray-300 text-start w-full text-sm sm:text-base">
+                        Join us looking for passionate researchers to join our team. Currently
+                        recruiting excellent students in building science, thermal comfort and
+                        sustainability.
+                    </p>
+                    <div className="flex gap-4">
+                        <GraduationCap className="w-5 h-5" />
+                        4 Master&apos;s Students
+                    </div>
+                    <div className="flex gap-4">
+                        <GraduationCap className="w-5 h-5" />
+                        2 PhD Students
+                    </div>
+                    <div className='flex gap-12 text-white mt-8'>
+                        <Link href="https://www.scopus.com/authid/detail.uri?authorId=54400115300" className='flex flex-col items-center justify-center gap-1'>
+                            <div className='w-8 h-8'>
+                                <svg className='w-full h-full' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4157" fill="currentColor">
+                                    <path d="M222.305191 32.218144C120.012585 32.218144 35.439958 117.059255 35.439958 219.083377v598.452019c0 102.292606 84.841112 186.865233 186.865233 186.865233h598.452019c102.292606 0 186.865233-84.841112 186.865234-186.865233V219.351862c0-102.292606-84.841112-186.865233-186.865234-186.865234H222.305191z m97.191401 738.869428V265.799685h374.53592v86.720504H420.71526v111.689565h253.986366v85.109596h-253.986366v136.658626h281.908757v45.64237l20.673309 39.735711H319.496592z m0 0" p-id="4159">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span className='text-sm font-bold'>
+                                Scopus
+                            </span>
+                        </Link>
+                        <Link href="mailto:contact@cribelab.org" className='flex flex-col items-center justify-center gap-1'>
+                            <div className='w-8 h-8'>
+                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3108" fill="currentColor">
+                                    <path d="M854.016 342.016l0-86.016-342.016 214.016-342.016-214.016 0 86.016 342.016 212.010667zM854.016 169.984q34.005333 0 59.008 25.984t25.002667 59.989333l0 512q0 34.005333-25.002667 59.989333t-59.008 25.984l-683.989333 0q-34.005333 0-59.008-25.984t-25.002667-59.989333l0-512q0-34.005333 25.002667-59.989333t59.008-25.984l683.989333 0z" p-id="3109">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span className='text-sm font-bold'>
+                                Email
+                            </span>
+                        </Link>
+                        <Link href="https://scholar.google.com/citations?user=qMU5vdgAAAAJ&hl=en" className='flex flex-col items-center justify-center gap-1'>
+                            <div className='w-8 h-8'>
+                                <svg className='w-full h-full' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4157" fill="currentColor">
+                                    <path d="M781.8 597s0 0.2 0.2 0.2c18.4 38.8 28.8 82.2 28.8 128C810.6 890.2 677 1024 512 1024s-298.6-133.8-298.6-298.6c0-45.8 10.4-89.2 28.8-128 3.4-7.2 7.2-14.4 11.2-21.4 8.8-15.2 18.8-29.4 30-42.6 54.8-65.2 137-106.6 228.8-106.6 67.2 0 129.2 22.2 179.2 59.8 18.2 13.8 34.8 29.4 49.6 47 11.2 13.2 21.2 27.6 30 42.6 4 6.8 7.6 14 11 21z m52.8-37.6c-60.2-116.8-182-196.8-322.6-196.8s-262.4 80-322.6 196.8L0 405.4 512 0l512 405.4-189.4 154.2z" p-id="4159">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span className='text-sm font-bold'>
+                                Scholar
+                            </span>
+                        </Link>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2 aspect-video rounded-lg overflow-hidden">
+                    <DynamicMap />
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default JoinSection;
+</file>
+
+<file path="components/publication/PublicationDetailCard.tsx">
+import { PublicationItem } from "@/lib/api";
+import Image from "next/image";
+import ReadMoreMoveButton from "@/components/custom/ReadMoreMoveButton";
+import NextLink from "next/link";
+
+export default function PublicationDetailCard({ publication }: { publication: PublicationItem }) {
+    return (
+        <div
+            className="flex flex-col w-[360px] h-[528px] py-4 px-4
+            bg-neutral-800 text-white
+            hover:bg-gray-100 rounded-sm transition-colors duration-300
+            hover:text-black"
+        >
+            <div className="text-sm font-thin italic h-4">
+                {publication.year} | {publication.journal}
+            </div>
+            <div className="@container text-md font-bold py-2 h-24 w-full">
+                <h2 className="[font-size:clamp(8px,5cqi,32px)] leading-tight h-full w-full">
+                    {publication.title}
+                </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-4 py-2">
+                <div className="flex flex-col text-sm font-thin italic">
+                    <span className="font-bold">Authors:</span>
+                    <div className="@container pt-1 h-12 w-full overflow-hidden">
+                        <p
+                            // 2. 使用 clamp() 和 cqi 单位设置字体大小
+                            // [font-size:clamp(min, preferred, max)]
+                            // 8px: 最小字体大小
+                            // 12px: 最大字体大小
+                            // 4cqi: 理想字体大小，即容器宽度的 4%。你需要微调这个值以达到最佳效果。
+                            className="[font-size:clamp(8px,4cqi,12px)]"
+                        >
+                            {publication.authors}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="relative overflow-hidden rounded-sm h-[200px]">
+                <Image
+                    src={publication.thumbnail}
+                    alt={publication.title}
+                    fill
+                    className="object-hidden" />
+            </div>
+            <div className="flex justify-between items-center py-8 px-1">
+                <ReadMoreMoveButton
+                    href={publication.url || ""}
+                    text="Read More"
+                />
+                <NextLink
+                    href={publication.pdf || ""}
+                    className="py-2 px-4 rounded-md text-sm bg-neutral-700 text-white font-extralight cursor-pointer">
+                    Download
+                </NextLink>
+            </div>
+        </div>
+    );
+}
+</file>
+
+<file path="components/ResearchSection.tsx">
+import Citation from "./custom/Citation";
+import SubTitle from "./custom/SubTitle";
+import ResearchSwiper from "./custom/ResearchSwiper";
+import { getResearchData } from "@/lib/api";
+
+
+const ResearchSection = async () => {
+    const citation =
+        "Our lab focuses on advancing building performance, thermal comfort, and sustainability in the context of changing urban environments and climate dynamics.";
+    const subtitle = "RESEARCH";
+    const researchData = await getResearchData();
+
+    return (
+        <section id="research" className="w-full py-20 bg-black overflow-x-hidden">
+            <div className="relative font-roboto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+                <SubTitle content={subtitle} />
+                <Citation content={citation} />
+                <ResearchSwiper researchAreas={researchData}/>
+
+            </div>
+        </section>
+        
+    );
+};
+
+export default ResearchSection;
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+import { Suspense } from "react";
+import GoogleAnalytics from "@/components/GoogleAnalytic";
+
+export const metadata: Metadata = {
+    title: "CRIBE Lab",
+    description: "LAB OF CLIMATE RESPONSIVE AND INTELLIGENT BUILT ENVIRONMENT",
+};
+export default function RootLayout({
+    children,
+}: Readonly<{ children: React.ReactNode }>) {
+    return (
+        <html lang="en">
+            <body className="antialiased flex flex-col">
+                <Suspense fallback={null}>
+                    <GoogleAnalytics />
+                </Suspense>
+                <Header />
+                {children}
+                <Footer />
+            </body>
+        </html>
+    );
+}
+</file>
+
+<file path="components/custom/ResearchCard.tsx">
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { ResearchItem } from "@/lib/api";
+
+const ResearchCard = ({ area }: { area: ResearchItem }) => {
+    return (
+        <div className="bg-black border border-neutral-700 
+            w-80 h-136 flex flex-col rounded-lg text-white shadow-md p-6">
+            <div className="relative w-full h-64 rounded-lg mb-6">
+                <Image
+                    src={area.image}
+                    alt={area.title}
+                    fill
+                    sizes="99vw"
+                    className="object-cover w-full h-full rounded-lg"
+                />
+            </div>
+            <div className="flex flex-col h-48">
+                <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-semibold text-neutral-100 line-clamp-2">{area.title}</h3>
+                    <div className="w-10 h-10 flex items-center justify-center shrink-0 border border-neutral-600 rounded-sm overflow-hidden">
+                        {area.icon || <div className="w-full h-full" />}
+                    </div>
+                </div>
+                <div className="@container h-24 w-full ">
+                    <p className="text-sm text-neutral-400 line-clamp-5">
+                        {area.description}
+                    </p>
+                </div>
+
+            </div>
+            <div className="mt-auto border-t border-neutral-800 text-center group/button">
+                <Link
+                    href={`/research/${area.id}`}
+                    className="inline-flex items-center justify-center mt-3 px-6 py-3 border border-white text-sm font-medium rounded-sm text-white hover:bg-white hover:text-black transition-colors duration-200"
+                >
+                    READ MORE <ArrowRight className="w-5 h-5 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export default ResearchCard;
+</file>
+
+<file path="components/custom/SelectedCard.tsx">
+import React from "react";
+import Link from "next/link";
+import Image from "next/image"; // 引入 Next.js Image 组件
+import type { PublicationItem } from "@/lib/api"; // 假设你的接口定义在这里
+
+// 1. 更新 Props 接口定义
+interface SelectedCardProps {
+  publication: PublicationItem; // 接收一个 PublicationItem 类型的对象
+  className?: string; // className 设为可选
+}
+
+// 辅助函数：安全地渲染 HTML (可选，但推荐)
+// 注意：这里只做了基础处理，如果 WP 内容可能不安全，应使用 DOMPurify 等库
+const renderHTML = (htmlString: string | undefined | null) => {
+  if (!htmlString) return { __html: "" };
+  // 你可以在这里添加清理逻辑 if needed
+  return { __html: htmlString };
+};
+
+// 2. 更新组件实现
+export const SelectedCard = ({
+    publication,
+    className,
+}: SelectedCardProps) => {
+    return (
+        <Link href={publication.url || "#"} className={`overflow-hidden hover:opacity-80 transition-opacity duration-300 flex flex-row w-full items-start gap-4 relative ${className}`}>
+            <div className="flex w-40 h-32 bg-neutral-800 relative overflow-hidden rounded-sm">
+                {publication.thumbnail ? (
+                    <Image
+                        src={publication.thumbnail}
+                        alt={publication.title || "Publication thumbnail"}
+                        fill
+                        sizes="99vw"
+                        className="object-cover"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
+                        No Image
+                    </div>
+                )}
+            </div>
+
+            <div className="flex-1 flex flex-col justify-between h-32 pt-1">
+                <div>
+                    <p
+                        className="font-medium text-sm text-white leading-snug"
+                        dangerouslySetInnerHTML={renderHTML(publication.title)}
+                    >
+                    </p>
+                    <p className="mt-1 text-xs text-gray-400 line-clamp-2">
+                        {publication.summary || "No summary available."}
+                    </p>
+                </div>
+                <p className="text-xs text-gray-500">
+                    {publication.authors || "Unknown authors"}
+                </p>
+            </div>
+        </Link>
+    );
+};
+</file>
+
+<file path="components/Footer.tsx">
+import Logo from "@/components/custom/Logo";
+
+const Footer = () => {
+    return (
+        <footer className="w-full bg-neutral-900 border-t border-neutral-800 py-10 overflow-hidden">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex gap-12 lg:gap-36 items-center justify-center">
+                    <div className="flex flex-col items-start space-y-4 w-fit">
+                        <Logo />
+                    </div>
+
+                    <div className="flex flex-col items-start space-y-4">
+                        <div className="flex items-center space-x-3 text-gray-300">
+                            <p className="font-Roboto text-sm text-gray-400">
+                                Climate Responsive and Intelligent Built Environment Lab™
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
+</file>
+
+<file path="app/page.tsx">
+// TODO: 换为Email,scopus, Google Scholar, Team，Research，Development子页面
+// TODO: 中文界面
+
+import HeroSection from "@/components/HeroSection";
+import ResearchSection from "@/components/ResearchSection";
+import PublicationsSection from "@/components/PublicationsSection";
+import DevelopmentSection from "@/components/DevelopmentSection";
+import TeamSection from "@/components/TeamSection";
+import NewsSection from "@/components/NewsSection"; // eslint-disable-line
+import JoinSection from "@/components/JoinSection";
+import { getPublicationsData } from "@/lib/api";
+
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+    const [publicationsData] = await Promise.all([getPublicationsData()]);
+    return (
+        <main className="flex flex-col items-center min-h-screen bg-black text-white">
+            <HeroSection />
+            <ResearchSection />
+            <PublicationsSection publications={publicationsData} />
+            <DevelopmentSection />
+            <TeamSection /* teamMembers={teamData} */ />
+            {/* <NewsSection /> */}
+            <JoinSection />
+        </main>
+    );
+}
+</file>
+
+<file path="lib/api.ts">
+// lib/api.ts
+// TODO:Publications, TeamMembers 只能返回100条数据，由于per_page=100
+// TODO:其余API 也需要解决分页问题
+
+export const placeholderImage = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-content/uploads/2025/02/placeholder-1.svg`;
+
+interface ACFImage {
+    url?: string;
+    width?: number;
+    height?: number;
+}
+
+interface ResearchACF {
+    title?: string | null;
+    description?: string | null;
+    thumbnail?: ACFImage;
+    icon?: string | null;
+}
+
+interface PublicationACF {
+    categories?: string | null;
+    authors?: string | null;
+    thumbnail?: ACFImage | null;
+    thumbnail_describe?: string | null;
+    year?: string | null;
+    title?: string | null;
+    summary?: string | null;
+    journal?: string | null;
+    abstract?: string | null;
+    url?: string | null;
+    pdf?: string | null;
+    is_selected?: boolean;
+}
+
+interface TeamMemberACF {
+    name?: string | null;
+    role?: string | null;
+    is_featured?: boolean;
+    member_image?: ACFImage | null;
+    is_team?: boolean;
+    description?: string | null;
+}
+
+interface DevelopmentACF {
+    title?: string | null;
+    url?: string | null;
+    description?: string | null;
+    thumbnail?: ACFImage;
+}
+
+interface NewACF {
+    title?: string;
+    date?: string;
+    url?: string | null;
+    description?: string | null;
+    thumbnail?: ACFImage;
+}
+
+interface BaseWordPressPost {
+    id: number;
+    title?: { // WP Post 主 title
+        rendered: string;
+    };
+    _embedded?: {
+        'wp:featuredmedia'?: {
+            source_url?: string;
+        }[];
+    };
+}
+
+// --- Specific WordPress Post Data Interfaces ---
+interface WordPressResearchPostData extends BaseWordPressPost {
+    acf?: ResearchACF;
+}
+
+interface WordPressPublicationPostData extends BaseWordPressPost {
+    acf?: PublicationACF;
+}
+
+interface WordPressTeamMemberPostData extends BaseWordPressPost {
+    acf?: TeamMemberACF;
+}
+
+interface WordPressDevelopmentPostData extends BaseWordPressPost {
+    acf?: DevelopmentACF;
+}
+
+interface WordPressNewPostData extends BaseWordPressPost {
+    acf?: NewACF;
+}
+
+export interface ResearchItem {
+    id: number;
+    title: string; // 来自 ResearchACF.title (ACF 字段)
+    description: string | null; // 来自 ResearchACF
+    image: string; // 来自 ResearchACF.thumbnail.url 或占位符
+    width?: number;
+    height?: number;
+    icon?: string;
+}
+
+export interface PublicationItem {
+    id: number;
+    categories: string; // 来自 PublicationACF
+    authors: string;    // 来自 PublicationACF
+    thumbnail: string; // 来自 PublicationACF.thumbnail.url 或 _embedded
+    thumbnail_describe?: string | null; // 来自 PublicationACF
+    year: string;       // 来自 PublicationACF
+    title: string;      // 来自 PublicationACF.title (ACF 字段)
+    summary?: string | null; // 来自 PublicationACF
+    journal?: string | null; // 来自 PublicationACF
+    abstract?: string | null; // 来自 PublicationACF
+    url?: string | null;     // 来自 PublicationACF
+    pdf?: string | null;     // 来自 PublicationACF
+    is_selected?: boolean; // 来自 PublicationACF
+}
+
+export interface TeamMemberItem {
+    id: number;
+    name: string;       // 来自 TeamMemberACF
+    role?: string | null;// 来自 TeamMemberACF
+    image: string;// 来自 TeamMemberACF.member_image.url 或占位符
+    is_featured?: boolean; // 来自 TeamMemberACF
+    is_team?: boolean; // 来自 TeamMemberACF
+    width?: number | null;
+    height?: number | null;
+    description?: string | null;
+}
+
+export interface DevelopmentItem {
+    id: number;
+    title: string;
+    url: string | null;
+    description: string | null;
+    image: string;
+}
+
+export interface NewItem {
+    id: number;
+    title: string;
+    date: string | null;
+    url: string | null;
+    description: string | null;
+    image: string;
+}
+
+export async function getResearchData(): Promise<ResearchItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/research`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch research data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        // 使用更具体的类型
+        const data: WordPressResearchPostData[] = await res.json();
+        const researchItems: ResearchItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
+            return {
+                id: item.id,
+                title: item.acf?.title || 'Untitled Research',
+                description: item.acf?.description || null,
+                image: acfImageUrl, // image 现在直接使用 acfImageUrl
+                width: item.acf?.thumbnail?.width || undefined,
+                height: item.acf?.thumbnail?.height || undefined,
+                icon: item.acf?.icon || undefined,
+            };
+        });
+        return researchItems;
+    } catch (error) {
+        console.error("Error fetching or processing research data:", error);
+        return [];
+    }
+}
+
+export async function getPublicationsData(): Promise<PublicationItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/publication?_embed&orderby=date&order=desc&per_page=100`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch publications: ${res.status} ${res.statusText}`)
+            return [];
+        }
+        // 使用更具体的类型
+        const data: WordPressPublicationPostData[] = await res.json();
+
+        const publications: PublicationItem[] = data.map((item) => {
+            const acfThumbnailUrl = item.acf?.thumbnail?.url || placeholderImage;
+            return {
+                id: item.id,
+                categories: item.acf?.categories || 'Unknown Category',
+                authors: item.acf?.authors || 'Unknown Authors',
+                thumbnail: acfThumbnailUrl,
+                thumbnail_describe: item.acf?.thumbnail_describe || null,
+                year: item.acf?.year || 'N/A',
+                title: item.acf?.title || item.title?.rendered || 'Untitled Publication', // 优先 ACF title，其次 WP Post title
+                summary: item.acf?.summary || null,
+                journal: item.acf?.journal || null,
+                abstract: item.acf?.abstract || null,
+                url: item.acf?.url || null,
+                pdf: item.acf?.pdf || null,
+                is_selected: item.acf?.is_selected || false,
+            };
+        });
+        return publications;
+    } catch (error) {
+        console.error("Error fetching or processing publications data:", error);
+        return [];
+    }
+}
+
+export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/member?per_page=100`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch team members: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data: WordPressTeamMemberPostData[] = await res.json();
+        const teamMembers: TeamMemberItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.member_image?.url || placeholderImage;
+            const width = item.acf?.member_image?.width || null;
+            const height = item.acf?.member_image?.height || null;
+            return {
+                id: item.id,
+                name: item.acf?.name || item.title?.rendered || 'Unknown Member',
+                role: item.acf?.role || null,
+                image: acfImageUrl,
+                is_featured: item.acf?.is_featured || false,
+                is_team: item.acf?.is_team || false,
+                width: width,
+                height: height,
+                description: item.acf?.description || null,
+            };
+        });
+
+        return teamMembers;
+    } catch (error) {
+        console.error("Error fetching or processing team members data:", error);
+        return [];
+    }
+}
+
+export async function getDevelopmentData(): Promise<DevelopmentItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/development`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch development data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data: WordPressDevelopmentPostData[] = await res.json();
+        const developmentItems: DevelopmentItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
+            return {
+                id: item.id,
+                title: item.acf?.title || 'Untitled Development',
+                url: item.acf?.url || null,
+                description: item.acf?.description || null,
+                image: acfImageUrl,
+            };
+        });
+        return developmentItems;
+    } catch (error) {
+        console.error("Error fetching or processing development data:", error);
+        return [];
+    }
+}
+
+export async function getNewsData(): Promise<NewItem[]> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return [];
+    }
+    const fetchUrl = `${apiUrl}/wp-json/wp/v2/new`;
+    try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+            console.error(`Failed to fetch news data: ${res.status} ${res.statusText}`);
+            return [];
+        }
+        const data: WordPressNewPostData[] = await res.json();
+        const newsItems: NewItem[] = data.map((item) => {
+            const acfImageUrl = item.acf?.thumbnail?.url || placeholderImage;
+            return {
+                id: item.id,
+                title: item.acf?.title || 'Untitled New',
+                date: item.acf?.date || null,
+                url: item.acf?.url || null,
+                description: item.acf?.description || null,
+                image: acfImageUrl,
+            };
+        });
+        return newsItems;
+    } catch (error) {
+        console.error("Error fetching or processing news data:", error);
+        return [];
+    }
+}
+
+export interface MeanItem {
+    id: string;
+    label: string;
+    href: string;
+    sub_href: string;
+}
+
+export async function getMeanData(): Promise<MeanItem[]> {
+    const meanitems: MeanItem[] = [
+        { id: 'mean-home', label: 'Home', href: 'home', sub_href: '/#home' },
+        { id: 'mean-research', label: 'Research', href: 'research', sub_href: '/#research' },
+        { id: 'mean-publications', label: 'Publications', href: 'publications', sub_href: '/#publications' },
+        { id: 'mean-development', label: 'Development', href: 'development', sub_href: '/#development' },
+        { id: 'mean-team', label: 'Team', href: 'team', sub_href: '/#team' },
+        { id: 'mean-join', label: 'Join Us', href: 'join', sub_href: '/#join' },
+    ];
+    return meanitems;
+}
+</file>
+
+</files>

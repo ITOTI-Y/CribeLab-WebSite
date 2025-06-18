@@ -20,7 +20,7 @@
       "sortByChangesMaxCommits": 100
     }
   },
-  "include": ["app/","components/","lib/"],
+  "include": ["app/","components/","lib/","types/"],
   "ignore": {
     "useGitignore": true,
     "useDefaultPatterns": true,
