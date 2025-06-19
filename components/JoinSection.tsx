@@ -27,11 +27,19 @@ const JoinSection = () => {
                     </p>
                     <div className="flex gap-4">
                         <GraduationCap className="w-5 h-5" />
-                        4 Master&apos;s Students
+                        5 Master&apos;s Students
                     </div>
                     <div className="flex gap-4">
                         <GraduationCap className="w-5 h-5" />
-                        2 PhD Students
+                        <p>
+                        1 PhD student (Chinese mainland resident)
+                        </p>
+                        
+                    </div>
+                    <div className="flex gap-4">
+                        <p className="ml-9">
+                        2 PhD student (non-Chinese mainland resident)
+                        </p>
                     </div>
                     <div className='flex gap-12 text-white mt-8'>
                         <Link href="https://www.scopus.com/authid/detail.uri?authorId=54400115300" className='flex flex-col items-center justify-center gap-1'>
