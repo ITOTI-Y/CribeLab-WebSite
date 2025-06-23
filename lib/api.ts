@@ -25,6 +25,7 @@ interface PublicationACF {
     summary?: string | null;
     journal?: string | null;
     abstract?: string | null;
+    content?: string | null;
     url?: string | null;
     pdf?: string | null;
     is_selected?: boolean;
@@ -71,6 +72,7 @@ interface WordPressResearchPostData extends BaseWordPressPost {
 }
 
 interface WordPressPublicationPostData extends BaseWordPressPost {
+    slug: string;
     acf?: PublicationACF;
 }
 
@@ -100,6 +102,7 @@ export interface ResearchItem {
 
 export interface PublicationItem {
     id: number;
+    slug: string;
     categories: string;
     authors: string;
     thumbnail: string;
@@ -109,6 +112,7 @@ export interface PublicationItem {
     summary?: string | null;
     journal?: string | null;
     abstract?: string | null;
+    content?: string | null;
     url?: string | null;
     pdf?: string | null;
     is_selected?: boolean;
@@ -227,6 +231,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
         const acfThumbnailUrl = item.acf?.thumbnail?.url || placeholderImage;
         return {
             id: item.id,
+            slug: item.slug,
             categories: item.acf?.categories || 'Unknown Category',
             authors: item.acf?.authors || 'Unknown Authors',
             thumbnail: acfThumbnailUrl,
@@ -236,6 +241,7 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
             summary: item.acf?.summary || null,
             journal: item.acf?.journal || null,
             abstract: item.acf?.abstract || null,
+            content: item.acf?.content || null,
             url: item.acf?.url || null,
             pdf: item.acf?.pdf || null,
             is_selected: item.acf?.is_selected || false,
@@ -309,6 +315,42 @@ export async function getNewsData(): Promise<NewItem[]> {
             image: acfImageUrl,
         };
     });
+}
+
+export async function getPublicationBySlug(slug: string): Promise<PublicationItem | null> {
+    const apiUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+    if (!apiUrl) {
+        console.error("WordPress API URL is not configured in .env.local");
+        return null;
+    }
+    const baseUrl = `${apiUrl}/wp-json/wp/v2/publication?slug=${slug}&_embed`;
+    const data = await fetchAllPages<WordPressPublicationPostData>(baseUrl);
+
+    if (data.length === 0) {
+        return null;
+    }
+
+    const item = data[0];
+    const acfThumbnailUrl = item.acf?.thumbnail?.url || placeholderImage;
+    const publicationItem: PublicationItem = {
+        id: item.id,
+        slug: item.slug,
+        categories: item.acf?.categories || 'Unknown Category',
+        authors: item.acf?.authors || 'Unknown Authors',
+        thumbnail: acfThumbnailUrl,
+        thumbnail_describe: item.acf?.thumbnail_describe || null,
+        year: item.acf?.year || 'N/A',
+        title: item.acf?.title || item.title?.rendered || 'Untitled Publication',
+        summary: item.acf?.summary || null,
+        journal: item.acf?.journal || null,
+        abstract: item.acf?.abstract || null,
+        content: item.acf?.content || null,
+        url: item.acf?.url || null,
+        pdf: item.acf?.pdf || null,
+        is_selected: item.acf?.is_selected || false,
+    };
+
+    return publicationItem;
 }
 
 // --- Static Data ---
