@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PublicationItem } from "@/lib/api";
+import Link from "next/link";
 
 export default function AllPublicationFrame({ publications,}: { publications: PublicationItem[];}) {
     const [selectedYear, setSelectedYear] = useState("all");
@@ -44,9 +45,9 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
                 <ScrollArea className="h-96 md:h-128 w-full pr-4">
                     {filteredPublications.map((pub) => (
                         pub.url ? (
-                            <a
+                            <Link
                                 key={pub.id}
-                                href={pub.url}
+                                href={`/publications/${pub.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block py-4 border-b border-gray-800 group"
@@ -55,7 +56,7 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
                                 <p className="text-xs text-gray-500">
                                     {pub.authors} ({pub.year})
                                 </p>
-                            </a>
+                            </Link>
                         ) : (
                             <div
                                 key={pub.id}

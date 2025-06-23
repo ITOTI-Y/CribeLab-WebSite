@@ -2,7 +2,7 @@ import Logo from "@/components/custom/Logo";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-neutral-900 border-t border-neutral-800 py-10 overflow-hidden">
+        <footer className="w-full bg-neutral-900 border-t border-neutral-800 pt-6 pb-6 overflow-hidden">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex gap-12 lg:gap-36 items-center justify-center">
                     <div className="flex flex-col items-start space-y-4 w-fit">

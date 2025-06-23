@@ -15,7 +15,7 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                 {publication.year} | {publication.journal}
             </div>
             <div className="@container text-md font-bold py-2 h-24 w-full">
-                <h2 className="[font-size:clamp(8px,5cqi,32px)] leading-tight h-full w-full">
+                <h2 className="[font-size:clamp(4px,4.5cqi,32px)] leading-tight h-full w-full">
                     {publication.title}
                 </h2>
             </div>
@@ -24,11 +24,6 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
                     <span className="font-bold">Authors:</span>
                     <div className="@container pt-1 h-12 w-full overflow-hidden">
                         <p
-                            // 2. 使用 clamp() 和 cqi 单位设置字体大小
-                            // [font-size:clamp(min, preferred, max)]
-                            // 8px: 最小字体大小
-                            // 12px: 最大字体大小
-                            // 4cqi: 理想字体大小，即容器宽度的 4%。你需要微调这个值以达到最佳效果。
                             className="[font-size:clamp(8px,4cqi,12px)]"
                         >
                             {publication.authors}
@@ -45,8 +40,9 @@ export default function PublicationDetailCard({ publication }: { publication: Pu
             </div>
             <div className="flex justify-between items-center py-8 px-1">
                 <ReadMoreMoveButton
-                    href={publication.url || ""}
+                    href={`/publications/${publication.slug}`}
                     text="Read More"
+                    className=""
                 />
                 <NextLink
                     href={publication.pdf || ""}

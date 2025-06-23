@@ -23,7 +23,7 @@ export const SelectedCard = ({
     className,
 }: SelectedCardProps) => {
     return (
-        <Link href={publication.url || "#"} className={`overflow-hidden hover:opacity-80 transition-opacity duration-300 flex flex-row w-full items-start gap-4 relative ${className}`}>
+        <Link href={`/publications/${publication.slug}`} className={`overflow-hidden hover:opacity-80 transition-opacity duration-300 flex flex-row w-full items-start gap-4 relative ${className}`}>
             <div className="flex w-40 h-32 bg-neutral-800 relative overflow-hidden rounded-sm">
                 {publication.thumbnail ? (
                     <Image
