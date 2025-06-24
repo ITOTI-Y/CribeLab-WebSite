@@ -11,10 +11,10 @@ const HeroSection = () => {
                 
                 <div className="relative z-20 flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
                     <h1 className="text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 lg:px-8 font-roboto font-extrabold text-white leading-tight tracking-wide">
-                        Creating smart-driven climate-resilient buildings and cities
+                    Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab)
                     </h1>
                     <p className="hidden lg:block w-full text-2xl text-center p-2">
-                        Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab)
+                        Creating smart-driven climate-resilient buildings and cities
                     </p>
                 </div>
             </div>
