@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
+    "@headlessui/react": "^2.2.4",
+    "@heroicons/react": "^2.2.0",
     "@heroui/image": "^2.2.12",
     "@heroui/skeleton": "^2.2.12",
     "@heroui/slider": "^2.4.17",
@@ -18,6 +20,7 @@
     "@uiw/react-amap": "^7.1.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.19.1",
     "lucide-react": "^0.511.0",
     "next": "^15.3.3",
     "react": "^19.1.0",

@@ -15,7 +15,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className="antialiased flex flex-col">
+            <body className="antialiased realtive flex flex-col">
                 <Suspense fallback={null}>
                     <GoogleAnalytics />
                 </Suspense>

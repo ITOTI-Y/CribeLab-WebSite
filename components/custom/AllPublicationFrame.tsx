@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PublicationItem } from "@/lib/api";
+import YearSelector from "./YearSelector";
 import Link from "next/link";
 
 export default function AllPublicationFrame({ publications,}: { publications: PublicationItem[];}) {
@@ -18,11 +19,12 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 gap-x-4">
                 <h3 className="text-xl w-fit font-semibold text-white">
                     All Publications
                 </h3>
-                <div className="grid grid-cols-4 md:grid-cols-9 gap-x-2 gap-y-1">
+                <YearSelector selectedYear={selectedYear} setSelectedYear={setSelectedYear} years={years} />
+                {/* <div className="grid grid-cols-4 md:grid-cols-9 gap-x-2 gap-y-1">
                     <button
                         onClick={() => setSelectedYear("all")}
                         className={`px-2 py-1 rounded-md text-sm ${selectedYear === "all" ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}
@@ -38,7 +40,7 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
                             {year}
                         </button>
                     ))}
-                </div>
+                </div> */}
             </div>
 
             <div className="space-y-6">
