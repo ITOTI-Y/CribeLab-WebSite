@@ -38,6 +38,10 @@ interface TeamMemberACF {
     thumbnail?: ACFImage | null;
     is_team?: boolean;
     description?: string | null;
+    email?: string | null;
+    scholar?: string | null;
+    scopus?: string | null;
+    further_information?: string | null;
 }
 
 interface DevelopmentACF {
@@ -128,6 +132,10 @@ export interface TeamMemberItem {
     width?: number | null;
     height?: number | null;
     description?: string | null;
+    email?: string | null;
+    scholar?: string | null;
+    scopus?: string | null;
+    further_information?: string | null;
 }
 
 export interface DevelopmentItem {
@@ -270,6 +278,10 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
             width: item.acf?.thumbnail?.width || null,
             height: item.acf?.thumbnail?.height || null,
             description: item.acf?.description || null,
+            email: item.acf?.email || null,
+            scholar: item.acf?.scholar || null,
+            scopus: item.acf?.scopus || null,
+            further_information: item.acf?.further_information || null,
         };
     });
 }
