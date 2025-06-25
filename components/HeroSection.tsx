@@ -8,10 +8,18 @@ const HeroSection = () => {
         >
             <VideoBackground />
             <div className="relative w-full h-full mx-auto">
-                
+
                 <div className="relative z-20 flex flex-col h-full w-full items-center justify-center lg:justify-end lg:pb-12">
                     <h1 className="text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 lg:px-8 font-roboto font-extrabold text-white leading-tight tracking-wide">
-                    Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab)
+                        <p>
+                            Lab of Climate Responsive and
+                        </p>
+                        <p>
+                            Intelligent Built Environmen
+                        </p>
+                        <p className="text-end">
+                            —— CRIBE Lab
+                        </p>
                     </h1>
                     <p className="hidden lg:block w-full text-2xl text-center p-2">
                         Creating smart-driven climate-resilient buildings and cities

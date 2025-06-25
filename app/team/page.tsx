@@ -12,7 +12,7 @@ export default async function TeamPage() {
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold p-6 text-center sm:text-start">
                     Team Members
                 </h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
                     {teamLeaders.map((member) => (
                         <MemberCard key={member.id} member={member} />
                     ))}
