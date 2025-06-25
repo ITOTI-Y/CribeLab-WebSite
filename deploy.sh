@@ -22,6 +22,9 @@ echo "Node version: $(node -v)"
 echo "Bun version: $(bun -v)"
 echo "PM2 version: $(pm2 -v)"
 
+echo "🔍 Checking for required dependencies..."
+bun install
+
 echo "🏗️ Building project..."
 bun run build
 
