@@ -2,7 +2,6 @@
 
 import { GraduationCap } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 
 const DynamicMap = dynamic(
     () => import('./custom/MapComponent'),
@@ -41,7 +40,7 @@ const JoinSection = () => {
                         2 PhD student (non-Chinese mainland resident)
                         </p>
                     </div>
-                    <div className='flex gap-12 text-white mt-8'>
+                    {/* <div className='flex gap-12 text-white mt-8'>
                         <Link href="https://www.scopus.com/authid/detail.uri?authorId=54400115300" className='flex flex-col items-center justify-center gap-1'>
                             <div className='w-8 h-8'>
                                 <svg className='w-full h-full' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4157" fill="currentColor">
@@ -75,7 +74,7 @@ const JoinSection = () => {
                                 Scholar
                             </span>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="w-full md:w-1/2 aspect-video rounded-lg overflow-hidden">
                     <DynamicMap />

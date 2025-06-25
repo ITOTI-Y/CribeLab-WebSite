@@ -6,7 +6,7 @@ import { PublicationItem } from "@/lib/api";
 import YearSelector from "./YearSelector";
 import Link from "next/link";
 
-export default function AllPublicationFrame({ publications,}: { publications: PublicationItem[];}) {
+export default function AllPublicationFrame({ publications, }: { publications: PublicationItem[]; }) {
     const [selectedYear, setSelectedYear] = useState("all");
     const years = [...new Set(publications.map((pub) => pub.year))].sort(
         (a, b) => parseInt(b) - parseInt(a),
@@ -23,24 +23,10 @@ export default function AllPublicationFrame({ publications,}: { publications: Pu
                 <h3 className="text-xl w-fit font-semibold text-white">
                     All Publications
                 </h3>
-                <YearSelector selectedYear={selectedYear} setSelectedYear={setSelectedYear} years={years} />
-                {/* <div className="grid grid-cols-4 md:grid-cols-9 gap-x-2 gap-y-1">
-                    <button
-                        onClick={() => setSelectedYear("all")}
-                        className={`px-2 py-1 rounded-md text-sm ${selectedYear === "all" ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}
-                    >
-                        ALL
-                    </button>
-                    {years.map((year) => (
-                        <button
-                            key={year}
-                            onClick={() => setSelectedYear(year)}
-                            className={`px-1 py-1 rounded-md text-sm ${selectedYear === year ? "text-white bg-neutral-800" : "text-gray-400"} cursor-pointer hover:bg-neutral-700 transition-colors duration-300`}
-                        >
-                            {year}
-                        </button>
-                    ))}
-                </div> */}
+                <div className="w-36">
+                    <YearSelector selectedYear={selectedYear} setSelectedYear={setSelectedYear} years={years} />
+                </div>
+
             </div>
 
             <div className="space-y-6">

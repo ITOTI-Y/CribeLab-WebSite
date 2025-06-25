@@ -11,6 +11,7 @@ interface YearSelectorProps {
 }
 
 export default function YearSelector({ selectedYear, setSelectedYear, years }: YearSelectorProps) {
+    const allyears = ['all', ...years]
     return (
         <div className="w-full flex-1">
             <Listbox value={selectedYear} onChange={setSelectedYear}>
@@ -31,7 +32,7 @@ export default function YearSelector({ selectedYear, setSelectedYear, years }: Y
                     data-[enter]:duration-200 data-[enter]:ease-out
                     data-[leave]:duration-150 data-[leave]:ease-in
                     ">
-                        {years.map((year) => (
+                        {allyears.map((year) => (
                             <ListboxOption key={year} value={year}
                                 className="group relative cursor-default select-none py-2 pl-3 text-gray-900
                             data-[focus]:bg-indigo-600 data-[focus]:text-white data-[focus]:outline-none">

@@ -12,11 +12,11 @@ export default async function TeamSection() {
     return (
         <section id="team" className="w-full py-20 bg-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-10 flex-col md:flex-row">
-                <div className="relative w-full md:w-1/2 h-54 md:h-96">
+                <div className="relative w-full md:w-1/2 aspect-video">
                     <Image src={team[0]?.image} alt={team[0]?.name} fill sizes="99vw" className="object-cover rounded-lg" />
                     <div className="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                         <h3 className="text-2xl text-center font-bold text-neutral-200">
-                            The gravity of ideas is bringing us together.
+                            {/* The gravity of ideas is bringing us together. */}
                         </h3>
                     </div>
                 </div>
