@@ -42,6 +42,7 @@ interface TeamMemberACF {
     scholar?: string | null;
     scopus?: string | null;
     further_information?: string | null;
+    development_role?: string | null;
 }
 
 interface DevelopmentACF {
@@ -136,6 +137,7 @@ export interface TeamMemberItem {
     scholar?: string | null;
     scopus?: string | null;
     further_information?: string | null;
+    development_role?: string | null;
 }
 
 export interface DevelopmentItem {
@@ -282,6 +284,7 @@ export async function getTeamMembersData(): Promise<TeamMemberItem[]> {
             scholar: item.acf?.scholar || null,
             scopus: item.acf?.scopus || null,
             further_information: item.acf?.further_information || null,
+            development_role: item.acf?.development_role || null,
         };
     });
 }

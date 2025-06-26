@@ -9,10 +9,13 @@ const Footer = () => {
                         <Logo />
                     </div>
 
-                    <div className="flex flex-col items-start space-y-4">
-                        <div className="flex items-center space-x-3 text-gray-300">
+                    <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-center text-gray-300">
                             <p className="font-Roboto text-sm text-gray-400">
                                 Climate Responsive and Intelligent Built Environment Lab™
+                            </p>
+                            <p className="font-Roboto text-sm text-gray-400 mt-2">
+                                2025 CRIBE Lab, Tsinghua University. All rights reserved.
                             </p>
                         </div>
                     </div>
