@@ -22,6 +22,9 @@ echo "Node version: $(node -v)"
 echo "Bun version: $(bun -v)"
 echo "PM2 version: $(pm2 -v)"
 
+echo "Clearing cache..."
+bun run clear-cache
+
 echo "🔍 Checking for required dependencies..."
 bun install
 
