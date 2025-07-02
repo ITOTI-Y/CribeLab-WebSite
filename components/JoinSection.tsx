@@ -21,7 +21,7 @@ const JoinSection = () => {
                             Join Our Lab
                         </h2>
                         <p className="text-gray-300 text-start w-full text-sm sm:text-base">
-                            Join us looking for passionate researchers to join our team. Currently
+                            We are looking for passionate researchers to join our team. Currently
                             recruiting excellent students in building science, thermal comfort and
                             sustainability.
                         </p>
