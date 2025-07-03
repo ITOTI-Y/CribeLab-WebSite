@@ -80,7 +80,7 @@ export default function MapComponent() {
                 <Home size={16} />
             </button>
             
-            <p className='text-sm text-white bg-neutral-400'>
+            <p className='absolute bottom-0 text-sm text-white font-bold bg-neutral-500/50 text-center w-full'>
                 Room 309, Building H, Tsinghua Campus Shenzhen University Town, Shenzhen
             </p>
         </div>

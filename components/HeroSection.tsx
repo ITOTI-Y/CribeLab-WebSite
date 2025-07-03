@@ -15,7 +15,7 @@ const HeroSection = () => {
                             Lab of Climate Responsive and
                         </p>
                         <p>
-                            Intelligent Built Environmen
+                            Intelligent Built Environment
                         </p>
                         <p className="text-end">
                             —— CRIBE Lab

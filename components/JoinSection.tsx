@@ -14,7 +14,7 @@ const DynamicMap = dynamic(
 const JoinSection = () => {
     return (
         <section id="join" className="w-full">
-            <div className="py-14 bg-neutral-900 rounded-lg">
+            <div className="py-8 bg-neutral-900 rounded-lg">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-10 flex-col md:flex-row">
                     <div className="w-full md:w-1/2 flex flex-col justify-start py-5 gap-4">
                         <h2 className="text-3xl font-extrabold text-white text-start ">
