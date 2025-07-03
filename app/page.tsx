@@ -23,8 +23,8 @@ export default async function Home() {
             <DevelopmentSection />
             <TeamSection /* teamMembers={teamData} */ />
             {/* <NewsSection /> */}
-            <Contributor />
             <JoinSection />
+            <Contributor />
         </main>
     );
 }
