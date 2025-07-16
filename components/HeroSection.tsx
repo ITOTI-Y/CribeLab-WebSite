@@ -28,13 +28,16 @@ const HeroSection = () => {
             </div>
             <div className="relative z-20 w-full flex items-center flex-col lg:flex-row p-4 lg:p-20 gap-4 lg:gap-0">
                 <div className="w-full text-center lg:w-2/5">
-                    <h2 className="text-xl lg:text-4xl font-bold">
+                    <h2 className="text-xl lg:text-4xl font-bold mb-2">
                         OUR MISSION
                     </h2>
                 </div>
                 <div className="w-full line-clamp-5 lg:line-clamp-none text-sm lg:text-md text-center lg:text-left leading-relaxed">
                     <p>
                         Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab) looks for systematic approach that makes buildings and cities adapt responsively to changing climate conditions by incorporating smart technologies and design strategies that optimize energy usage, enhance comfort, and minimize environmental impact. The end of our research is to create human-made and human-centered surroundings that respond dynamically to changing weather and climate patterns while utilizing intelligent systems to manage energy consumption and physical environment effectively in buildings and cities.
+                    </p>
+                    <p className="font-bold text-end mt-2">
+                        —— Pengyuan Shen, Lab Founder, Associate Professor (Tsinghua SIGS)
                     </p>
                 </div>
             </div>
