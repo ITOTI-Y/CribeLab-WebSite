@@ -36,7 +36,7 @@ const HeroSection = () => {
                     <p>
                         Lab of Climate Responsive and Intelligent Built Environment (CRIBE Lab) looks for systematic approach that makes buildings and cities adapt responsively to changing climate conditions by incorporating smart technologies and design strategies that optimize energy usage, enhance comfort, and minimize environmental impact. The end of our research is to create human-made and human-centered surroundings that respond dynamically to changing weather and climate patterns while utilizing intelligent systems to manage energy consumption and physical environment effectively in buildings and cities.
                     </p>
-                    <p className="font-bold text-end mt-2">
+                    <p className="text-end mt-2">
                         —— Pengyuan Shen, Lab Founder, Associate Professor (Tsinghua SIGS)
                     </p>
                 </div>
