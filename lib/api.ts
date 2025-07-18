@@ -13,6 +13,7 @@ interface ResearchACF {
     description?: string | null;
     thumbnail?: ACFImage;
     icon?: string | null;
+    detail_content?: string | null;
 }
 
 interface PublicationACF {
@@ -103,6 +104,7 @@ export interface ResearchItem {
     width?: number;
     height?: number;
     icon?: string | null;
+    detail_content?: string | null;
 }
 
 export interface PublicationItem {
@@ -224,6 +226,7 @@ export async function getResearchData(): Promise<ResearchItem[]> {
             width: item.acf?.thumbnail?.width,
             height: item.acf?.thumbnail?.height,
             icon: item.acf?.icon,
+            detail_content: item.acf?.detail_content || null,
         };
     });
 }
