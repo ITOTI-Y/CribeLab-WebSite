@@ -30,8 +30,7 @@ const JoinSection = () => {
                             5 Master&apos;s Students
                         </div>
                         <div className="flex gap-4">
-                            <GraduationCap className="w-5 h-5" />
-                            <p>
+                            <p className="ml-9">
                                 1 PhD student (Chinese mainland resident)
                             </p>
 
@@ -39,6 +38,11 @@ const JoinSection = () => {
                         <div className="flex gap-4">
                             <p className="ml-9">
                                 2 PhD student (non-Chinese mainland resident)
+                            </p>
+                        </div>
+                        <div className="flex gap-4">
+                            <p className="ml-9">
+                                2 Postdocs
                             </p>
                         </div>
                     </div>

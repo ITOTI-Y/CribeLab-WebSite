@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'images.pexels.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'file.chat-yu.net',
+            },
         ],
     },
     allowedDevOrigins: ['100.64.116.13', 'localhost', '100.83.249.139'],
