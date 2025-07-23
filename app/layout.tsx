@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytic";
 
+import 'katex/dist/katex.min.css';
+
 export const metadata: Metadata = {
     title: "CRIBE Lab",
     description: "LAB OF CLIMATE RESPONSIVE AND INTELLIGENT BUILT ENVIRONMENT",

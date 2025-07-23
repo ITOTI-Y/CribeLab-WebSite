@@ -30,6 +30,7 @@ interface PublicationACF {
     url?: string | null;
     pdf?: string | null;
     is_selected?: boolean;
+    article_content?: string | null;
 }
 
 interface TeamMemberACF {
@@ -123,6 +124,7 @@ export interface PublicationItem {
     url?: string | null;
     pdf?: string | null;
     is_selected?: boolean;
+    article_content?: string | null;
 }
 
 export interface TeamMemberItem {
@@ -254,10 +256,10 @@ export async function getPublicationsData(): Promise<PublicationItem[]> {
             summary: item.acf?.summary || null,
             journal: item.acf?.journal || null,
             abstract: item.acf?.abstract || null,
-            content: item.acf?.content || null,
             url: item.acf?.url || null,
             pdf: item.acf?.pdf || null,
             is_selected: item.acf?.is_selected || false,
+            article_content: item.acf?.article_content || null,
         };
     });
 }
@@ -362,10 +364,10 @@ export async function getPublicationBySlug(slug: string): Promise<PublicationIte
         summary: item.acf?.summary || null,
         journal: item.acf?.journal || null,
         abstract: item.acf?.abstract || null,
-        content: item.acf?.content || null,
         url: item.acf?.url || null,
         pdf: item.acf?.pdf || null,
         is_selected: item.acf?.is_selected || false,
+        article_content: item.acf?.article_content || null,
     };
 
     return publicationItem;

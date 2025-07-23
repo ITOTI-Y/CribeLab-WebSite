@@ -36,10 +36,7 @@ export default function PublicationFrame({
                         <PublicationDetailCard key={publication.id} publication={publication} />
                     ))}
                 </div>
-                
-                {/* 这里可以添加展示 filteredPublications 的组件 */}
                 <div className="mt-8">
-                    {/* 示例：展示过滤后的出版物数量 */}
                     <p className="text-white">
                         {selectedYear === "All" 
                             ? `Show all  ${filteredPublications.length} publications`

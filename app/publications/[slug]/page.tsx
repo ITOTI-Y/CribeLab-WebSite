@@ -7,6 +7,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen, Calendar, ExternalLink, FileDown, Users } from 'lucide-react';
 
+import MarkdownRenderer from "@/components/custom/MarkdownRenderer";
+
 type Props = {
     params: Promise<{ slug: string }>;
 };
@@ -136,19 +138,27 @@ export default async function PublicationDetailPage({ params }: Props) {
                         </p>
                     </div>
                     <div className="mt-6 w-full">
-                        <h2 className="text-2xl font-bold">
-                            Article Content
-                        </h2>
-                        <div className="mt-3">
-                            <div className="h-128 flex flex-col justify-center items-center border-[1px] border-[#202937] bg-[#05070C] border-dashed rounded-lg p-6">
-                                <h3 className="text-lg text-neutral-400 text-center">
-                                    Typing...
-                                </h3>
-                                <p className="text-md text-neutral-400 mt-2 text-center">
-                                    The full content is currently under development.
-                                </p>
+                        {publication.article_content ? (
+                            <div className="">
+                                <MarkdownRenderer content={publication.article_content} />
                             </div>
-                        </div>
+                        ) : (
+                            <>
+                                <h2 className="text-2xl font-bold">
+                                    Article Content
+                                </h2>
+                                <div className="mt-3">
+                                    <div className="min-h-128 flex flex-col justify-center items-center border-[1px] border-[#202937] bg-[#05070C] border-dashed rounded-lg p-6">
+                                        <h3 className="text-lg text-neutral-400 text-center">
+                                            Typing...
+                                        </h3>
+                                        <p className="text-md text-neutral-400 mt-2 text-center">
+                                            The full content is currently under development.
+                                        </p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className="col-span-1 lg:col-span-4 flex flex-col gap-8 items-center lg:items-start p-4 lg:p-0">
