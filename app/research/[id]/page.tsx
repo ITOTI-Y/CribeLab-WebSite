@@ -1,7 +1,6 @@
 import React from "react";
 import { getResearchData } from "@/lib/api";
 import Image from "next/image";
-// eslint-disable-next-line
 import ReactMarkdown from "react-markdown";
 
 export default async function ResearchDetailSubPage({ params }: { params: Promise<{ id: string }> }) {
@@ -9,7 +8,6 @@ export default async function ResearchDetailSubPage({ params }: { params: Promis
     const all = await getResearchData();
     const detail = all.find(item => String(item.id) === id);
 
-    // eslint-disable-next-line
     const components = {
         a: (
             { ...props }: React.ComponentProps<'a'>) => {
@@ -39,14 +37,14 @@ export default async function ResearchDetailSubPage({ params }: { params: Promis
                         />
                     </div>
                 </div>
-                {/* <div className="mt-10 px-2">
-                    <div className="text-white text-2xl font-bold mb-6" style={{ textAlign: "left" }}>
+                <div className="mt-10 px-2">
+                    {/* <div className="text-white text-2xl font-bold mb-6" style={{ textAlign: "left" }}>
                         ABSTRACT
-                    </div>
+                    </div> */}
                     <div className="text-neutral-300 text-base md:text-lg">
                         <ReactMarkdown components={components}>{detail.detail_content || detail.description}</ReactMarkdown>
                     </div>
-                </div> */}
+                </div>
             </div>
         </main>
     );
