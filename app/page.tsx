@@ -18,10 +18,10 @@ export default async function Home() {
     return (
         <main className="flex flex-col items-center min-h-screen bg-black text-white">
             <HeroSection />
+            <NewsSection />
             <ResearchSection />
             <PublicationsSection publications={publicationsData} />
             <DevelopmentSection />
-            <NewsSection />
             <TeamSection/>
             <JoinSection />
             <Contributor />
