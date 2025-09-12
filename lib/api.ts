@@ -381,6 +381,14 @@ export interface MeanItem {
     sub_href: string;
 }
 
+/**
+ * 返回用于站点主导航的静态 MeanItem 列表。
+ *
+ * 该函数异步返回一个确定性的、预定义的导航项数组（id、label、href、sub_href），用于构建站点的主导航菜单。
+ * 列表包含：Home、News、Research、Publications、Development、Team、Join Us。
+ *
+ * @returns 一个 Promise，解析为 MeanItem 数组（静态且不会发起网络请求）
+ */
 export async function getMeanData(): Promise<MeanItem[]> {
     const meanitems: MeanItem[] = [
         { id: 'mean-home', label: 'Home', href: 'home', sub_href: '/#home' },

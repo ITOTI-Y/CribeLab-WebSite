@@ -13,6 +13,15 @@ import { getPublicationsData } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * 渲染网站首页的异步服务器组件。
+ *
+ * 该组件在服务端并行获取出版物数据（通过 getPublicationsData），将结果传入 PublicationsSection，并按固定顺序渲染页面各个子区块：HeroSection、NewsSection、ResearchSection、PublicationsSection、DevelopmentSection、TeamSection、JoinSection 和 Contributor。
+ *
+ * 注意：组件本身不做错误处理；来自 getPublicationsData 的错误会向上抛出并由调用方处理。
+ *
+ * @returns 返回用于渲染整页布局的 React 节点（JSX.Element）。
+ */
 export default async function Home() {
     const [publicationsData] = await Promise.all([getPublicationsData()]);
     return (
